@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 13311677}
   - component: {fileID: 13311681}
   - component: {fileID: 13311680}
-  - component: {fileID: 13311679}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -209,30 +208,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &13311679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 13311676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f435ac7b4641e2418e6ce49a84b4dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  angularTorqueVal: 10
-  maxAngularVelocity: 350
-  accelRatePerSec: 0
-  maxSpeed: 6
-  ballVelocity: 0
-  decelRatePerSec: 0
-  decelRotRatePerSec: 0
-  inputGiven: 0
-  movetimeMaxToZero: 6
-  movetimeZeroToMax: 1
-  rottimeMaxToZero: 1.5
-  upBoostSpeed: 0.4
 --- !u!58 &13311680
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -264,7 +239,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -559,7 +534,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649882639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -0.11, z: 0}
+  m_LocalPosition: {x: -0.12, y: 0.14, z: 0}
   m_LocalScale: {x: 1.8918194, y: 1.1317294, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
