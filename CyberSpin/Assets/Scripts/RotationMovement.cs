@@ -24,8 +24,6 @@ public class RotationMovement : MonoBehaviour
 
     public bool inputGiven;
 
-    public float moveInput;
-
     //Time Variables
     public float movetimeMaxToZero;
     public float movetimeZeroToMax;
@@ -52,11 +50,12 @@ public class RotationMovement : MonoBehaviour
 
     private void Update()
     {
-        moveInput = Input.GetAxis("Horizontal");
-
         currAngularVelocity = rb.angularVelocity;
 
-        rb.velocity = Vector2.right * ballVelocity;
+        if(inputGiven)
+        {
+            rb.velocity = Vector2.right * ballVelocity;
+        }
     }
 
     void FixedUpdate()
@@ -101,7 +100,9 @@ public class RotationMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
-            rb.velocity = Vector2.zero;
+            //Debugging Region !
+
+            //rb.velocity = Vector2.zero;
             rb.velocity += Vector2.up * upBoostSpeed;
             upBoostOn = true;
         }
@@ -130,26 +131,11 @@ public class RotationMovement : MonoBehaviour
             }
 
             // Decel incomplete
-            /*if (moveInput > 0)
+           /* if (rb.velocity.x > 0)
             {
                 Debug.Log("Positive");
 
                 ballVelocity += decelRatePerSec * Time.deltaTime;
-                ballVelocity = Mathf.Min(ballVelocity, 0f);
-                rb.velocity = transform.right * ballVelocity;
-                if (rb.velocity.x < 0f)
-                {
-                    Debug.Log("HEY !");
-                    rb.velocity = Vector2.zero;
-                }
-
-            }
-
-            if (moveInput < 0)
-            {
-                Debug.Log("Negative");
-            
-                ballVelocity += -decelRatePerSec * Time.deltaTime;
                 ballVelocity = Mathf.Max(ballVelocity, 0f);
                 rb.velocity = transform.right * ballVelocity;
             }*/
