@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 13311677}
   - component: {fileID: 13311681}
   - component: {fileID: 13311680}
+  - component: {fileID: 13311682}
   - component: {fileID: 13311679}
   m_Layer: 0
   m_Name: Character
@@ -218,21 +219,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 13311676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f435ac7b4641e2418e6ce49a84b4dd4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8634d6797995d634fa18e55321b48a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angularTorqueVal: 10
-  maxAngularVelocity: 350
-  accelRatePerSec: 0
-  maxSpeed: 6
-  ballVelocity: 0
-  decelRatePerSec: 0
-  decelRotRatePerSec: 0
-  inputGiven: 0
-  movetimeMaxToZero: 6
-  movetimeZeroToMax: 1
-  rottimeMaxToZero: 1.5
-  upBoostSpeed: 5
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+  boosterForce: 0
+  jumpForce: 0
+  currentStamina: 0
+  maxStamina: 0
+  isJumping: 0
+  airTime: 0
 --- !u!58 &13311680
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -270,6 +267,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &13311682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13311676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f201bd74b3d6ee341b6a19d9654b9264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  moveHorizontal: 0
+  moveVertical: 0
 --- !u!1 &53119332
 GameObject:
   m_ObjectHideFlags: 0
