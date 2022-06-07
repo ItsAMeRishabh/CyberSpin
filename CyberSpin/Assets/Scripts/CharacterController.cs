@@ -35,3 +35,7 @@ public class CharacterController : MonoBehaviour
     }
 
 }
+
+//TO DO
+
+// Deceleration and Acceleration for player horizontal movement.

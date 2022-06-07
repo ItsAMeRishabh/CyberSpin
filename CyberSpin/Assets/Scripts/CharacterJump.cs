@@ -32,11 +32,12 @@ public class CharacterJump : MonoBehaviour
 
     private void Start()
     {
-        currentStamina = maxStamina;
-
         isJumping = false;
 
         rb.gravityScale = currentGravity;
+
+        currentStamina = maxStamina;
+        StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
     }
 
     private void Update()
@@ -70,6 +71,7 @@ public class CharacterJump : MonoBehaviour
         {
             currentGravity = 1f;
             currentStamina -= Time.deltaTime;
+            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
             rb.AddForce(Vector2.up * boosterForce, ForceMode2D.Force);
             isBoosting = true;
         }
@@ -87,6 +89,7 @@ public class CharacterJump : MonoBehaviour
         {
             isJumping = false;
             currentStamina = maxStamina;
+            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
             airTime = 0;
         }
     }
@@ -99,3 +102,9 @@ public class CharacterJump : MonoBehaviour
         }
     }
 }
+
+
+// TO DO
+
+//Decelerate when boosting
+//Better Mid Air Character control
