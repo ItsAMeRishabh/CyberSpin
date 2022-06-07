@@ -293,11 +293,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallMultiplier: 6
   lowJumpMultiplier: 3
-  boosterForce: 50
+  boosterForce: 80
   jumpForce: 50
   currentStamina: 0
-  maxStamina: 10
+  maxStamina: 5
   isJumping: 0
+  isBoosting: 0
   airTime: 0
 --- !u!1 &519420028
 GameObject:

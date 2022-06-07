@@ -6,18 +6,20 @@ public class CharacterJump : MonoBehaviour
 {
     CharacterController scriptCharacterController;
 
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
+    [SerializeField]private float fallMultiplier;
 
-    public float boosterForce;
-    public float jumpForce;
+    [SerializeField]private float boosterForce;
+    [SerializeField]private float jumpForce;
 
-    public float currentStamina;
-    public float maxStamina;
+    private float currentStamina;
+    [SerializeField]private float maxStamina;
 
-    public bool isJumping;
+    private bool isJumping;
+    private bool isBoosting;
 
-    public float airTime;
+    private float airTime;
+
+    private float currentGravity;
 
     Rigidbody2D rb;
 
@@ -33,14 +35,15 @@ public class CharacterJump : MonoBehaviour
         currentStamina = maxStamina;
 
         isJumping = false;
+
+        rb.gravityScale = currentGravity;
     }
 
     private void Update()
     {
-        if(rb.velocity.y < 0)
+        if(rb.velocity.y < 0 && !isBoosting)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier -1) * Time.deltaTime;
-
         }
 
         if(isJumping)
@@ -54,16 +57,26 @@ public class CharacterJump : MonoBehaviour
 
     private void FixedUpdate()
     {
+        rb.gravityScale = currentGravity;
+
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && !isJumping)
         {
+
             rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
 
         }
 
-        if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && isJumping && airTime >0.5f)
+        else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && isJumping && airTime > 0.3f)
         {
+            currentGravity = 1f;
             currentStamina -= Time.deltaTime;
             rb.AddForce(Vector2.up * boosterForce, ForceMode2D.Force);
+            isBoosting = true;
+        }
+        else
+        {
+            isBoosting = false;
+            currentGravity = 9.8f;
         }
 
     }
