@@ -9,7 +9,7 @@ public class StaminaBar : MonoBehaviour
 
     public static StaminaBar instanceStaminaBar;
 
-    private void Start()
+    private void Awake()
     {
         instanceStaminaBar = this;
     }
