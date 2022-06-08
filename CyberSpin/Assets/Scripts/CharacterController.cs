@@ -8,10 +8,10 @@ public class CharacterController : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public float moveSpeed;
+    [SerializeField] private float moveSpeed;
 
-    public float moveHorizontal;
-    public float moveVertical;
+    private float moveHorizontal;
+    private float moveVertical;
 
     void Start()
     {
@@ -35,3 +35,7 @@ public class CharacterController : MonoBehaviour
     }
 
 }
+
+//TO DO
+
+// Deceleration and Acceleration for player horizontal movement.
