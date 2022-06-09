@@ -108,3 +108,10 @@ public class CharacterJump : MonoBehaviour
 
 //Decelerate when boosting
 //Better Mid Air Character control
+
+//JUMP LENGTHS TEST INI
+
+//velocity 26 -> 1.5b
+//any vel -> 1.2 Jump Height
+//sta -> 1.2 Jump Height
+//low ini Vel -> 0.4b
