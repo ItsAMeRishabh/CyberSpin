@@ -4,38 +4,65 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    CharacterJump scriptCharacterJump;
-
     private Rigidbody2D rb;
 
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float airSpeed;
+
+    [SerializeField] private float accel;
+    [SerializeField] private float deccel;
+    [SerializeField] private float velPow;
 
     private float moveHorizontal;
-    private float moveVertical;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        scriptCharacterJump = GetComponent<CharacterJump>();
     }
 
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
-        moveVertical = Input.GetAxisRaw("Vertical");
     }
 
     private void FixedUpdate()
     {
-        if(moveHorizontal > 0.1f || moveHorizontal< -0.1f)
+        if(CharacterJump.instanceCharacterJump.isJumping)
         {
-            rb.AddForce(new Vector2(moveHorizontal * moveSpeed, 0f), ForceMode2D.Force);
+            if (rb.velocity.y < 50.0f)
+            {
+                BetterMovement(airSpeed);
+            }
         }
+        else
+        {
+            BetterMovement(moveSpeed);
+        }
+    }
+
+    void BetterMovement(float speed)
+    {
+        float targetSpeed = moveHorizontal * speed;
+
+        float speedDif = targetSpeed - rb.velocity.x;
+
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accel : deccel;
+
+        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
+
+        rb.AddForce(movement * Vector2.right);
     }
 
 }
 
-//TO DO
 
-// Deceleration and Acceleration for player horizontal movement.
+//EMERGENCY CODE
+
+/*void HorizontalMove(float speed)
+{
+    if (moveHorizontal > 0.1f || moveHorizontal < -0.1f)
+    {
+        rb.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Force);
+    }
+}*/

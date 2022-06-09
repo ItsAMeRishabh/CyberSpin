@@ -224,6 +224,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 25
+  airSpeed: 18
+  accel: 2
+  deccel: 2
+  velPow: 1
 --- !u!58 &13311680
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -289,10 +293,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8634d6797995d634fa18e55321b48a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallMultiplier: 6
-  boosterForce: 80
+  boosterForce: 50
   jumpForce: 50
+  accel: 4
+  deccel: 0
+  velPow: 1
+  fallMultiplier: 6
   maxStamina: 5
+  isJumping: 0
+  currentGravity: 9.8
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,35 +4,42 @@ using UnityEngine;
 
 public class CharacterJump : MonoBehaviour
 {
-    CharacterController scriptCharacterController;
+    public static CharacterJump instanceCharacterJump;
 
-    [SerializeField]private float fallMultiplier;
+    Rigidbody2D rb;
 
+    //AIR SPEEDS
     [SerializeField]private float boosterForce;
     [SerializeField]private float jumpForce;
 
+    //MID AIR ACCEL & DECEL
+    private float airTime;
+    [SerializeField]private float accel;
+    [SerializeField]private float deccel;
+    [SerializeField]private float velPow;
+    [SerializeField]private float fallMultiplier;
+
+    //STAMINA
     private float currentStamina;
     [SerializeField]private float maxStamina;
 
-    private bool isJumping;
+    //BOOLS
+    public bool isJumping;
     private bool isBoosting;
 
-    private float airTime;
-
-    private float currentGravity;
-
-    Rigidbody2D rb;
+    public float currentGravity;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        scriptCharacterController = GetComponent<CharacterController>();
+        instanceCharacterJump = this;
     }
 
     private void Start()
     {
         isJumping = false;
+        isBoosting = false;
 
         rb.gravityScale = currentGravity;
 
@@ -42,24 +49,24 @@ public class CharacterJump : MonoBehaviour
 
     private void Update()
     {
-        if(rb.velocity.y < 0 && !isBoosting)
+        //MODIFIED FALL
+        if (rb.velocity.y < 0 && !isBoosting)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier -1) * Time.deltaTime;
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        if(isJumping)
+        if (isJumping)
         {
             airTime += Time.deltaTime;
         }
-
-        Debug.Log(currentStamina);
-        Debug.Log(airTime);
     }
 
     private void FixedUpdate()
     {
+        //GRAVITY SCALE
         rb.gravityScale = currentGravity;
 
+        //NORMAL JUMP
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && !isJumping)
         {
 
@@ -67,20 +74,35 @@ public class CharacterJump : MonoBehaviour
 
         }
 
+        //MID_AIR BOOSTING
         else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && isJumping && airTime > 0.3f)
         {
-            currentGravity = 1f;
+            //currentGravity = 1f;
             currentStamina -= Time.deltaTime;
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
-            rb.AddForce(Vector2.up * boosterForce, ForceMode2D.Force);
             isBoosting = true;
+
+            BetterBoostMovement();
+
         }
         else
         {
             isBoosting = false;
-            currentGravity = 9.8f;
         }
 
+    }
+
+    void BetterBoostMovement()
+    {
+        float targetSpeed = boosterForce;
+
+        float speedDif = targetSpeed - rb.velocity.y;
+
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accel : deccel;
+
+        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
+
+        rb.AddForce(movement * Vector2.up);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -101,17 +123,5 @@ public class CharacterJump : MonoBehaviour
             isJumping = true;
         }
     }
+
 }
-
-
-// TO DO
-
-//Decelerate when boosting
-//Better Mid Air Character control
-
-//JUMP LENGTHS TEST INI
-
-//velocity 26 -> 1.5b
-//any vel -> 1.2 Jump Height
-//sta -> 1.2 Jump Height
-//low ini Vel -> 0.4b
