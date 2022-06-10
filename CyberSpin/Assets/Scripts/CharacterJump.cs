@@ -63,6 +63,7 @@ public class CharacterJump : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         //GRAVITY SCALE
         rb.gravityScale = currentGravity;
 
@@ -70,7 +71,7 @@ public class CharacterJump : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && !isJumping)
         {
 
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
 
         }
 
@@ -83,7 +84,7 @@ public class CharacterJump : MonoBehaviour
             isBoosting = true;
 
             BetterBoostMovement();
-
+            //rb.bodyType = RigidbodyType2D.Kinematic;
         }
         else
         {

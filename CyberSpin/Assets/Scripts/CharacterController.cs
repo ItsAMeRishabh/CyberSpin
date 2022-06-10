@@ -18,7 +18,6 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     void Update()
@@ -28,6 +27,7 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Player control Mid-Air
         if(CharacterJump.instanceCharacterJump.isJumping)
         {
             if (rb.velocity.y < 50.0f)
@@ -35,12 +35,14 @@ public class CharacterController : MonoBehaviour
                 BetterMovement(airSpeed);
             }
         }
+        //Player Control On Ground
         else
         {
             BetterMovement(moveSpeed);
         }
     }
 
+    //Horizontal Movement Script
     void BetterMovement(float speed)
     {
         float targetSpeed = moveHorizontal * speed;
@@ -59,6 +61,7 @@ public class CharacterController : MonoBehaviour
 
 //EMERGENCY CODE
 
+//Previous Movement
 /*void HorizontalMove(float speed)
 {
     if (moveHorizontal > 0.1f || moveHorizontal < -0.1f)
