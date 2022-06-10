@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    public static CharacterController insCharCont;
     private Rigidbody2D rb;
 
     [SerializeField] private float moveSpeed;
@@ -15,6 +16,12 @@ public class CharacterController : MonoBehaviour
 
     private float moveHorizontal;
 
+
+    private void Awake()
+    {
+        insCharCont = this;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +30,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
+        
     }
 
     private void FixedUpdate()
@@ -32,20 +40,20 @@ public class CharacterController : MonoBehaviour
         {
             if (rb.velocity.y < 50.0f)
             {
-                BetterMovement(airSpeed);
+                BetterMovement(moveHorizontal, airSpeed);
             }
         }
         //Player Control On Ground
         else
         {
-            BetterMovement(moveSpeed);
+            BetterMovement(moveHorizontal, moveSpeed);
         }
     }
 
     //Horizontal Movement Script
-    void BetterMovement(float speed)
+    public void BetterMovement(float moveDirection, float speed)
     {
-        float targetSpeed = moveHorizontal * speed;
+        float targetSpeed = moveDirection * speed;
 
         float speedDif = targetSpeed - rb.velocity.x;
 
