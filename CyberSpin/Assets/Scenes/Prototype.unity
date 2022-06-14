@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 138899805}
   - component: {fileID: 138899804}
   - component: {fileID: 138899803}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 539000704}
   - component: {fileID: 539000703}
   - component: {fileID: 539000702}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 768286129}
   - component: {fileID: 768286128}
   - component: {fileID: 768286127}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1076,7 +1076,6 @@ GameObject:
   - component: {fileID: 902719307}
   - component: {fileID: 902719306}
   - component: {fileID: 902719305}
-  - component: {fileID: 902719304}
   - component: {fileID: 902719303}
   - component: {fileID: 902719302}
   m_Layer: 0
@@ -1098,14 +1097,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8634d6797995d634fa18e55321b48a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circleCollider2D: {fileID: 902719305}
   boosterForce: 50
   jumpForce: 50
   accel: 4
   deccel: 0
   velPow: 1
   fallMultiplier: 6
-  maxStamina: 1
-  isJumping: 0
+  maxStamina: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   currentGravity: 9.8
 --- !u!114 &902719303
 MonoBehaviour:
@@ -1124,22 +1126,6 @@ MonoBehaviour:
   accel: 2
   deccel: 2
   velPow: 1
---- !u!58 &902719304
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902719301}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!58 &902719305
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1351,7 +1337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1238499910}
   - component: {fileID: 1238499909}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor Collider
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1683,7 +1669,7 @@ GameObject:
   - component: {fileID: 1498251166}
   - component: {fileID: 1498251168}
   - component: {fileID: 1498251167}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (5)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -2188,7 +2174,7 @@ GameObject:
   - component: {fileID: 1948760036}
   - component: {fileID: 1948760035}
   - component: {fileID: 1948760037}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Ground
   m_Icon: {fileID: 0}

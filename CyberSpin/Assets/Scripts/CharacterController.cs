@@ -36,7 +36,7 @@ public class CharacterController : MonoBehaviour
     private void FixedUpdate()
     {
         //Player control Mid-Air
-        if(CharacterJump.instanceCharacterJump.isJumping)
+        if(!CharacterJump.instanceCharacterJump.isGrounded())
         {
             if (rb.velocity.y < 50.0f)
             {
