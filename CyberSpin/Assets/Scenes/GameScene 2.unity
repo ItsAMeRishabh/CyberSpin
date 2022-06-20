@@ -299,7 +299,7 @@ MonoBehaviour:
   deccel: 0
   velPow: 1
   fallMultiplier: 6
-  maxStamina: 3
+  maxStamina: 5
   isJumping: 0
   currentGravity: 9.8
 --- !u!1 &399359395
