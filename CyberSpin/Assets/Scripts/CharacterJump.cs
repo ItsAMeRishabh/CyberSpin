@@ -35,6 +35,8 @@ public class CharacterJump : MonoBehaviour
 
     public float currentGravity;
 
+    public ParticleSystem boosterSystem;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -71,6 +73,9 @@ public class CharacterJump : MonoBehaviour
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
             airTime = 0;
         }
+
+        //BOOSTER PARTICLE POSITION SET
+        boosterSystem.transform.position = rb.transform.position;
     }
 
     private void FixedUpdate()
@@ -95,11 +100,13 @@ public class CharacterJump : MonoBehaviour
             isBoosting = true;
 
             BetterBoostMovement();
-            //rb.bodyType = RigidbodyType2D.Kinematic;
+
+            boosterSystem.Play();
         }
         else
         {
             isBoosting = false;
+            boosterSystem.Stop();
         }
 
     }

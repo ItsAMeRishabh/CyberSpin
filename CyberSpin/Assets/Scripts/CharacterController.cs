@@ -16,7 +16,6 @@ public class CharacterController : MonoBehaviour
 
     private float moveHorizontal;
 
-
     private void Awake()
     {
         insCharCont = this;
@@ -30,7 +29,6 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
-        
     }
 
     private void FixedUpdate()
