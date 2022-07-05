@@ -25,6 +25,14 @@ public class GravityController : MonoBehaviour
         {
             Physics2D.gravity = new Vector2(-9.8f, 0);
         }
+        if (gravityDirection == 2)
+        {
+            Physics2D.gravity = new Vector2(0, 9.8f);
+        }
+        if (gravityDirection == 3)
+        {
+            Physics2D.gravity = new Vector2(9.8f, 0);
+        }
     }
 }
 

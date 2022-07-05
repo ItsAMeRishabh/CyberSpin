@@ -109,19 +109,37 @@ public class CharacterJump : MonoBehaviour
         rb.gravityScale = currentGravity;
 
         //NORMAL JUMP
+
+        #region NormalJump
+        //vertical down
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
         {
 
             rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
 
         }
-
+        //horizontal left
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
 
             rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
 
         }
+        //vertical up
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
+        {
+
+            rb.AddForce(new Vector2(rb.velocity.x, -jumpForceY), ForceMode2D.Impulse);
+
+        }
+        //horizontal right
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
+        {
+
+            rb.AddForce(new Vector2(-jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
+
+        }
+        #endregion
 
         //MID_AIR BOOSTING
         else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.3f)
@@ -165,6 +183,18 @@ public class CharacterJump : MonoBehaviour
             GravityController.instanceGravityController.gravityDirection = 1;
             CharacterController.insCharCont.gravityVertical = false;
         }
+
+        if (isGroundedVerticalUp())
+        {
+            GravityController.instanceGravityController.gravityDirection = 2;
+            CharacterController.insCharCont.gravityVertical = true;
+        }
+
+        if (isGroundedHorizontalRight())
+        {
+            GravityController.instanceGravityController.gravityDirection = 3;
+            CharacterController.insCharCont.gravityVertical = false;
+        }
     }
 
     //BOOST MOVEMENT
@@ -200,6 +230,23 @@ public class CharacterJump : MonoBehaviour
         Debug.Log(raycastHit2D.collider);
         return raycastHit2D.collider != null;
     }
+    public bool isGroundedVerticalUp()
+    {
+        float extraHeight = 0.1f;
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(circleCollider2D.bounds.center, Vector2.up, circleCollider2D.bounds.extents.y + extraHeight, gravityLayer);
+        Color rayColor;
+        if (raycastHit2D.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }
+        Debug.DrawRay(circleCollider2D.bounds.center, Vector2.up * (circleCollider2D.bounds.extents.y + extraHeight));
+        Debug.Log(raycastHit2D.collider);
+        return raycastHit2D.collider != null;
+    }
 
     public bool isGroundedHorizontal()
     {
@@ -219,6 +266,23 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
 
+    public bool isGroundedHorizontalRight()
+    {
+        float extraHeight = 0.1f;
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(circleCollider2D.bounds.center, Vector2.right, circleCollider2D.bounds.extents.y + extraHeight, gravityLayer);
+        Color rayColor;
+        if (raycastHit2D.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }
+        Debug.DrawRay(circleCollider2D.bounds.center, Vector2.right * (circleCollider2D.bounds.extents.y + extraHeight));
+        Debug.Log(raycastHit2D.collider);
+        return raycastHit2D.collider != null;
+    }
 
     //Old GroundCheck Code
     #region

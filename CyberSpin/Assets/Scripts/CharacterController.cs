@@ -14,6 +14,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float deccel;
     [SerializeField] private float velPow;
 
+    private float moveMagnitude;
+
     private float moveHorizontal;
 
     public bool gravityVertical;
@@ -33,22 +35,36 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         moveHorizontal = Input.GetAxisRaw("Horizontal");
+
+        if(CharacterJump.instanceCharacterJump.isGroundedVerticalUp() || CharacterJump.instanceCharacterJump.isGroundedHorizontalRight())
+        {
+            moveMagnitude = -1;
+        }
+        else
+        {
+            moveMagnitude = 1;
+        }
     }
 
     private void FixedUpdate()
     {
         if(gravityVertical)
         {
-            //Player control Mid-Air
-            if (!CharacterJump.instanceCharacterJump.isGroundedVertical())
+            //Player control Mid-Air normal
+            if (!CharacterJump.instanceCharacterJump.isGroundedVertical() && GravityController.instanceGravityController.gravityDirection ==0)
             {
-                if (rb.velocity.y < 50.0f)
+                if (rb.velocity.y < 50.0f * moveMagnitude)
                 {
                     BetterMovementX(moveHorizontal, airSpeed);
                 }
             }
             //Player Control On Ground
-            else
+            if(CharacterJump.instanceCharacterJump.isGroundedVertical())
+            {
+                BetterMovementX(moveHorizontal, moveSpeed);
+            }
+
+            if(CharacterJump.instanceCharacterJump.isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
             {
                 BetterMovementX(moveHorizontal, moveSpeed);
             }
@@ -57,16 +73,22 @@ public class CharacterController : MonoBehaviour
         
         if (!gravityVertical)
         {
-            //Player control Mid-Air
-            if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal())
+            //Player control Mid-Air normal
+            if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
             {
-                if (rb.velocity.x < 50.0f)
+                if (rb.velocity.x < 50.0f * moveMagnitude)
                 {
                     BetterMovementY(moveHorizontal, airSpeed);
                 }
             }
             //Player Control On Ground
-            else
+            if(CharacterJump.instanceCharacterJump.isGroundedHorizontal())
+            {
+                BetterMovementY(moveHorizontal, moveSpeed);
+            }
+
+            
+            if(CharacterJump.instanceCharacterJump.isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
             {
                 BetterMovementY(moveHorizontal, moveSpeed);
             }
@@ -78,26 +100,26 @@ public class CharacterController : MonoBehaviour
     {
         float targetSpeed = moveDirection * speed;
 
-        float speedDif = targetSpeed - rb.velocity.x;
+        float speedDif = targetSpeed - rb.velocity.x * moveMagnitude;
 
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accel : deccel;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
 
-        rb.AddForce(movement * Vector2.right);
+        rb.AddForce(movement * Vector2.right * moveMagnitude);
     }
 
     public void BetterMovementY(float moveDirection, float speed)
     {
         float targetSpeed = moveDirection * speed;
 
-        float speedDif = targetSpeed + rb.velocity.y;
+        float speedDif = targetSpeed + rb.velocity.y * moveMagnitude;
 
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accel : deccel;
 
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
 
-        rb.AddForce(movement * Vector2.down);
+        rb.AddForce(movement * Vector2.down * moveMagnitude);
     }
 
 }
