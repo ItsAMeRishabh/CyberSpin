@@ -11,7 +11,8 @@ public class CharacterJump : MonoBehaviour
 
     //AIR SPEEDS
     [SerializeField]private float boosterForce;
-    [SerializeField]private float jumpForce;
+    [SerializeField]private float jumpForceY;
+    [SerializeField] private float jumpForceX;
 
 
     //MID AIR ACCEL & DECEL
@@ -111,14 +112,14 @@ public class CharacterJump : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
         {
 
-            rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
 
         }
 
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
 
-            rb.AddForce(new Vector2(jumpForce, rb.velocity.y), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
 
         }
 
