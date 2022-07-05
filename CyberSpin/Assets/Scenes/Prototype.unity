@@ -1361,7 +1361,7 @@ MonoBehaviour:
   circleCollider2D: {fileID: 902719305}
   boosterForce: 50
   jumpForceY: 50
-  jumpForceX: 30
+  jumpForceX: 40
   accel: 4
   deccel: 0
   velPow: 1
@@ -1373,6 +1373,7 @@ MonoBehaviour:
   gravityLayer:
     serializedVersion: 2
     m_Bits: 64
+  isBoosting: 0
   currentGravity: 9.8
   boosterSystem: {fileID: 1592286774}
 --- !u!114 &902719303

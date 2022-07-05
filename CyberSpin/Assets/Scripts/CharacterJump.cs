@@ -29,11 +29,11 @@ public class CharacterJump : MonoBehaviour
     //ForGroundRayCast
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask gravityLayer;
-    
+
 
     //BOOLS
     //public bool isJumping;
-    private bool isBoosting;
+    [SerializeField] private bool isBoosting;
 
     public float currentGravity;
 
@@ -59,10 +59,18 @@ public class CharacterJump : MonoBehaviour
 
     private void Update()
     {
+        //Fall Modifiers
+
+        #region FallModifiers
         //MODIFIED FALL Y
         if (rb.velocity.y < 0 && !isBoosting)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        //MODIFIED FALL Y up
+        if (rb.velocity.y > 0 && !isBoosting)
+        {
+            rb.velocity += Vector2.down * -Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
         //MODIFIED FALL X
@@ -71,28 +79,21 @@ public class CharacterJump : MonoBehaviour
             rb.velocity += Vector2.right * Physics2D.gravity.x * (fallMultiplier - 1) * Time.deltaTime;
         }
 
+        //MODIFIED FALL X right
+        if (rb.velocity.x < 0 && !isBoosting)
+        {
+            rb.velocity += Vector2.left * -Physics2D.gravity.x * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        #endregion
+
         //Air Time Y
         if (!isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
         {
             airTime += Time.deltaTime;
         }
 
-        //Air Time X
-        if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
-        {
-            airTime += Time.deltaTime;
-        }
-
         //Stamina Y
         if (!isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
-        {
-            currentStamina = maxStamina;
-            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
-            airTime = 0;
-        }
-
-        //Stamina X
-        if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
             currentStamina = maxStamina;
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
@@ -129,7 +130,7 @@ public class CharacterJump : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
         {
 
-            rb.AddForce(new Vector2(rb.velocity.x, -jumpForceY), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(rb.velocity.x, -jumpForceX), ForceMode2D.Impulse);
 
         }
         //horizontal right
@@ -143,18 +144,6 @@ public class CharacterJump : MonoBehaviour
 
         //MID_AIR BOOSTING
         else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.3f)
-        {
-            //currentGravity = 1f;
-            currentStamina -= Time.deltaTime;
-            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
-            isBoosting = true;
-
-            BetterBoostMovement();
-
-            boosterSystem.Play();
-        }
-
-        else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1 && airTime > 0.3f)
         {
             //currentGravity = 1f;
             currentStamina -= Time.deltaTime;
