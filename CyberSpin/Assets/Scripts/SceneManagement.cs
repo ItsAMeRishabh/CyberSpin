@@ -11,6 +11,10 @@ public class SceneManagement : MonoBehaviour
     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     Debug.Log("NextScene");
   }
+  public void ChangeScene(int sceneIndex)
+  {
+      SceneManager.LoadScene(sceneIndex);
+  }
   public void Quit()
   {
     Application.Quit();
