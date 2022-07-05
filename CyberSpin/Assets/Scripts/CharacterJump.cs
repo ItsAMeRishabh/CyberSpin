@@ -26,7 +26,8 @@ public class CharacterJump : MonoBehaviour
     [SerializeField]private float maxStamina;
 
     //ForGroundRayCast
-    [SerializeField]private LayerMask groundLayer;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask gravityLayer;
     
 
     //BOOLS
@@ -49,7 +50,7 @@ public class CharacterJump : MonoBehaviour
         //isJumping = false;
         isBoosting = false;
 
-        rb.gravityScale = currentGravity;
+        //rb.gravityScale = currentGravity;
 
         currentStamina = maxStamina;
         StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
@@ -57,17 +58,40 @@ public class CharacterJump : MonoBehaviour
 
     private void Update()
     {
-        //MODIFIED FALL
+        //MODIFIED FALL Y
         if (rb.velocity.y < 0 && !isBoosting)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
-        if (!isGrounded())
+        //MODIFIED FALL X
+        if (rb.velocity.x < 0 && !isBoosting)
+        {
+            rb.velocity += Vector2.right * Physics2D.gravity.x * (fallMultiplier - 1) * Time.deltaTime;
+        }
+
+        //Air Time Y
+        if (!isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
         {
             airTime += Time.deltaTime;
         }
-        if(isGrounded())
+
+        //Air Time X
+        if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
+        {
+            airTime += Time.deltaTime;
+        }
+
+        //Stamina Y
+        if (!isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
+        {
+            currentStamina = maxStamina;
+            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
+            airTime = 0;
+        }
+
+        //Stamina X
+        if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
             currentStamina = maxStamina;
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
@@ -84,15 +108,22 @@ public class CharacterJump : MonoBehaviour
         rb.gravityScale = currentGravity;
 
         //NORMAL JUMP
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGrounded())
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
         {
 
             rb.AddForce(new Vector2(rb.velocity.x, jumpForce), ForceMode2D.Impulse);
 
         }
 
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
+        {
+
+            rb.AddForce(new Vector2(jumpForce, rb.velocity.y), ForceMode2D.Impulse);
+
+        }
+
         //MID_AIR BOOSTING
-        else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGrounded() && airTime > 0.3f)
+        else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.3f)
         {
             //currentGravity = 1f;
             currentStamina -= Time.deltaTime;
@@ -103,12 +134,36 @@ public class CharacterJump : MonoBehaviour
 
             boosterSystem.Play();
         }
+
+        else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1 && airTime > 0.3f)
+        {
+            //currentGravity = 1f;
+            currentStamina -= Time.deltaTime;
+            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
+            isBoosting = true;
+
+            BetterBoostMovement();
+
+            boosterSystem.Play();
+        }
+
         else
         {
             isBoosting = false;
             boosterSystem.Stop();
         }
 
+        if(isGroundedVertical())
+        {
+            GravityController.instanceGravityController.gravityDirection = 0;
+            CharacterController.insCharCont.gravityVertical = true;
+        }
+
+        if (isGroundedHorizontal())
+        {
+            GravityController.instanceGravityController.gravityDirection = 1;
+            CharacterController.insCharCont.gravityVertical = false;
+        }
     }
 
     //BOOST MOVEMENT
@@ -127,7 +182,7 @@ public class CharacterJump : MonoBehaviour
 
 
     //RAYCAST BASED GROUND CHECKs
-    public bool isGrounded()
+    public bool isGroundedVertical()
     {
         float extraHeight = 0.1f;
         RaycastHit2D raycastHit2D = Physics2D.Raycast(circleCollider2D.bounds.center, Vector2.down, circleCollider2D.bounds.extents.y + extraHeight, groundLayer);
@@ -145,6 +200,23 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
 
+    public bool isGroundedHorizontal()
+    {
+        float extraHeight = 0.1f;
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(circleCollider2D.bounds.center, Vector2.left, circleCollider2D.bounds.extents.y + extraHeight, gravityLayer);
+        Color rayColor;
+        if (raycastHit2D.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }
+        Debug.DrawRay(circleCollider2D.bounds.center, Vector2.left * (circleCollider2D.bounds.extents.y + extraHeight));
+        Debug.Log(raycastHit2D.collider);
+        return raycastHit2D.collider != null;
+    }
 
 
     //Old GroundCheck Code

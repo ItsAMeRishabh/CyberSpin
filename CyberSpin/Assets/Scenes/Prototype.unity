@@ -521,7 +521,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 138899802}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.76378, y: -11.295152, z: 215.5807}
+  m_LocalPosition: {x: -30.88, y: -11.295152, z: 215.5807}
   m_LocalScale: {x: 6.0206676, y: 2.2262607, z: 1}
   m_Children: []
   m_Father: {fileID: 215466938}
@@ -1229,6 +1229,7 @@ GameObject:
   - component: {fileID: 902719305}
   - component: {fileID: 902719303}
   - component: {fileID: 902719302}
+  - component: {fileID: 902719304}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -1259,6 +1260,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  gravityLayer:
+    serializedVersion: 2
+    m_Bits: 64
   currentGravity: 9.8
   boosterSystem: {fileID: 1592286774}
 --- !u!114 &902719303
@@ -1278,6 +1282,20 @@ MonoBehaviour:
   accel: 2
   deccel: 2
   velPow: 1
+  gravityVertical: 0
+--- !u!114 &902719304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902719301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8e2f09318284a4b921d01898b16fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityDirection: 0
 --- !u!58 &902719305
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1857,7 +1875,7 @@ GameObject:
   - component: {fileID: 1477075480}
   - component: {fileID: 1477075479}
   - component: {fileID: 1477075478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Magnetic Wall 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7038,7 +7056,7 @@ GameObject:
   - component: {fileID: 1893635692}
   - component: {fileID: 1893635691}
   - component: {fileID: 1893635690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Magnetic Wall 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7130,8 +7148,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893635689}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -33.13156, y: 7.098279, z: 219.0243}
-  m_LocalScale: {x: 2.5515168, y: 14.346747, z: 1}
+  m_LocalPosition: {x: -33.13156, y: -1.896, z: 219.0243}
+  m_LocalScale: {x: 2.5515168, y: 39.81509, z: 1}
   m_Children: []
   m_Father: {fileID: 996415082}
   m_RootOrder: 1

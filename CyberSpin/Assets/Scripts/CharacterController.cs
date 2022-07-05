@@ -16,6 +16,8 @@ public class CharacterController : MonoBehaviour
 
     private float moveHorizontal;
 
+    public bool gravityVertical;
+
     private void Awake()
     {
         insCharCont = this;
@@ -24,6 +26,8 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        gravityVertical = true;
     }
 
     void Update()
@@ -33,23 +37,44 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Player control Mid-Air
-        if(!CharacterJump.instanceCharacterJump.isGrounded())
+        if(gravityVertical)
         {
-            if (rb.velocity.y < 50.0f)
+            //Player control Mid-Air
+            if (!CharacterJump.instanceCharacterJump.isGroundedVertical())
             {
-                BetterMovement(moveHorizontal, airSpeed);
+                if (rb.velocity.y < 50.0f)
+                {
+                    BetterMovementX(moveHorizontal, airSpeed);
+                }
+            }
+            //Player Control On Ground
+            else
+            {
+                BetterMovementX(moveHorizontal, moveSpeed);
             }
         }
-        //Player Control On Ground
-        else
+
+        
+        if (!gravityVertical)
         {
-            BetterMovement(moveHorizontal, moveSpeed);
+            //Player control Mid-Air
+            if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal())
+            {
+                if (rb.velocity.x < 50.0f)
+                {
+                    BetterMovementY(moveHorizontal, airSpeed);
+                }
+            }
+            //Player Control On Ground
+            else
+            {
+                BetterMovementY(moveHorizontal, moveSpeed);
+            }
         }
     }
 
     //Horizontal Movement Script
-    public void BetterMovement(float moveDirection, float speed)
+    public void BetterMovementX(float moveDirection, float speed)
     {
         float targetSpeed = moveDirection * speed;
 
@@ -60,6 +85,19 @@ public class CharacterController : MonoBehaviour
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * Vector2.right);
+    }
+
+    public void BetterMovementY(float moveDirection, float speed)
+    {
+        float targetSpeed = moveDirection * speed;
+
+        float speedDif = targetSpeed + rb.velocity.y;
+
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? accel : deccel;
+
+        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
+
+        rb.AddForce(movement * Vector2.down);
     }
 
 }
