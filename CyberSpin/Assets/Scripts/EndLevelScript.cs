@@ -7,6 +7,8 @@ using UnityEngine.Playables;
 public class EndLevelScript : MonoBehaviour
 {
     public int nextSceneLoad;
+    
+    public GameObject victoryScreen;
 
    // public PlayableDirector pd;
     private void Start() 
@@ -19,10 +21,14 @@ public class EndLevelScript : MonoBehaviour
         if (other.gameObject.tag == "Player") 
         {
            // pd.Play();
-            
-           if(SceneManager.GetActiveScene().buildIndex == 5)
+            victoryScreen.SetActive(true);
+
+        }
+    }
+    private void NextUnlock()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 5)
             {
-                //SceneManager.LoadScene(nextSceneLoad);
                 Debug.Log("End of level");
             }
             else
@@ -34,7 +40,6 @@ public class EndLevelScript : MonoBehaviour
                     PlayerPrefs.SetInt("levelAt", nextSceneLoad);
                 }
             }
-        }
-
     }
 }
+
