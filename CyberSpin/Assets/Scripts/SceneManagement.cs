@@ -6,17 +6,26 @@ using UnityEngine.UI;
 
 public class SceneManagement : MonoBehaviour
 {
-  public void NextScene()
-  {
-    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    Debug.Log("NextScene");
-  }
+  public Animator transition;
+
+  public float transitionTime = 1f;
+
   public void ChangeScene(int sceneIndex)
   {
-      SceneManager.LoadScene(sceneIndex);
+      StartCoroutine(LoadLevel(sceneIndex));
   }
+
   public void Quit()
   {
     Application.Quit();
+  }
+
+  IEnumerator LoadLevel(int sceneIndex)
+  {
+    transition.SetTrigger("Start");
+
+    yield return new WaitForSeconds(transitionTime);
+
+    SceneManager.LoadScene(sceneIndex);
   }
 }
