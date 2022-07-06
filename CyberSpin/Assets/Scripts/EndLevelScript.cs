@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class EndLevelScript : MonoBehaviour
 {
     public int nextSceneLoad;
 
+   // public PlayableDirector pd;
     private void Start() 
     {
         nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;    
@@ -16,6 +18,8 @@ public class EndLevelScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player") 
         {
+           // pd.Play();
+            
            if(SceneManager.GetActiveScene().buildIndex == 5)
             {
                 //SceneManager.LoadScene(nextSceneLoad);
