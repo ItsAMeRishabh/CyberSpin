@@ -30,6 +30,11 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask gravityLayer;
 
+    private bool isFallingDown;
+    private bool isFallingUp;
+    private bool isFallingLeft;
+    private bool isFallingRight;
+
 
     //BOOLS
     //public bool isJumping;
@@ -55,6 +60,11 @@ public class CharacterJump : MonoBehaviour
 
         currentStamina = maxStamina;
         StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
+
+        isFallingDown = true;
+        isFallingUp= false;
+        isFallingLeft= false;
+        isFallingRight=false;
     }
 
     private void Update()
@@ -67,23 +77,23 @@ public class CharacterJump : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        //MODIFIED FALL Y up
-        if (rb.velocity.y > 0 && !isBoosting)
+        /*//MODIFIED FALL Y up
+        if (rb.velocity.y > 0 && !isBoosting && isFallingUp)
         {
             rb.velocity += Vector2.down * -Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 
         //MODIFIED FALL X
-        if (rb.velocity.x < 0 && !isBoosting)
+        if (rb.velocity.x < 0 && !isBoosting && isFallingLeft)
         {
             rb.velocity += Vector2.right * Physics2D.gravity.x * (fallMultiplier - 1) * Time.deltaTime;
         }
 
         //MODIFIED FALL X right
-        if (rb.velocity.x < 0 && !isBoosting)
+        if (rb.velocity.x < 0 && !isBoosting && isFallingRight)
         {
             rb.velocity += Vector2.left * -Physics2D.gravity.x * (fallMultiplier - 1) * Time.deltaTime;
-        }
+        }*/
         #endregion
 
         //Air Time Y
@@ -145,6 +155,7 @@ public class CharacterJump : MonoBehaviour
         //MID_AIR BOOSTING
         else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.3f)
         {
+            Debug.Log("BOOSTER CAN WORK");
             //currentGravity = 1f;
             currentStamina -= Time.deltaTime;
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
@@ -165,25 +176,65 @@ public class CharacterJump : MonoBehaviour
         {
             GravityController.instanceGravityController.gravityDirection = 0;
             CharacterController.insCharCont.gravityVertical = true;
+            isFallingDown = true;
+            isFallingUp = false;
+            isFallingLeft = false;
+            isFallingRight = false;
         }
 
         if (isGroundedHorizontal())
         {
             GravityController.instanceGravityController.gravityDirection = 1;
             CharacterController.insCharCont.gravityVertical = false;
+            isFallingDown = false;
+            isFallingUp = false;
+            isFallingLeft = true;
+            isFallingRight = false;
         }
 
         if (isGroundedVerticalUp())
         {
             GravityController.instanceGravityController.gravityDirection = 2;
             CharacterController.insCharCont.gravityVertical = true;
+            isFallingDown = false;
+            isFallingUp = true;
+            isFallingLeft = false;
+            isFallingRight = false;
         }
 
         if (isGroundedHorizontalRight())
         {
             GravityController.instanceGravityController.gravityDirection = 3;
             CharacterController.insCharCont.gravityVertical = false;
+            isFallingDown = false;
+            isFallingUp = false;
+            isFallingLeft = false;
+            isFallingRight = true;
         }
+
+        if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
+        {
+            GravityController.instanceGravityController.gravityDirection = 0;
+            CharacterController.insCharCont.gravityVertical = true;
+        }
+
+        if (!isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
+        {
+            GravityController.instanceGravityController.gravityDirection = 0;
+            CharacterController.insCharCont.gravityVertical = true;
+        }
+
+        if (!isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
+        {
+            GravityController.instanceGravityController.gravityDirection = 0;
+            CharacterController.insCharCont.gravityVertical = true;
+        }
+
+        //if(!isGroundedHorizontal() || !isGroundedHorizontalRight() || !isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection != 0)
+        //{
+        //   GravityController.instanceGravityController.gravityDirection = 0;
+        //   CharacterController.insCharCont.gravityVertical = true;
+        // }
     }
 
     //BOOST MOVEMENT
