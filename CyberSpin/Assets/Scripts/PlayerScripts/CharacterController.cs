@@ -7,7 +7,9 @@ public class CharacterController : MonoBehaviour
     public static CharacterController insCharCont;
     private Rigidbody2D rb;
 
+    private float currentMoveSpeed;
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float speedUpMoveSpeed;
     [SerializeField] private float airSpeed;
 
     [SerializeField] private float accel;
@@ -30,6 +32,8 @@ public class CharacterController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         gravityVertical = true;
+
+        currentMoveSpeed = moveSpeed;
     }
 
     void Update()
@@ -61,36 +65,36 @@ public class CharacterController : MonoBehaviour
             //Player Control On Ground
             if(CharacterJump.instanceCharacterJump.isGroundedVertical())
             {
-                BetterMovementX(moveHorizontal, moveSpeed);
+                BetterMovementX(moveHorizontal, currentMoveSpeed);
             }
 
             if(CharacterJump.instanceCharacterJump.isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
             {
-                BetterMovementX(moveHorizontal, moveSpeed);
+                BetterMovementX(moveHorizontal, currentMoveSpeed);
             }
         }
 
         
         if (!gravityVertical)
         {
-            //Player control Mid-Air normal
+            /*//Player control Mid-Air normal
             if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
             {
                 if (rb.velocity.x < 50.0f * moveMagnitude)
                 {
                     BetterMovementY(moveHorizontal, airSpeed);
                 }
-            }
+            }*/
             //Player Control On Ground
             if(CharacterJump.instanceCharacterJump.isGroundedHorizontal())
             {
-                BetterMovementY(moveHorizontal, moveSpeed);
+                BetterMovementY(moveHorizontal, currentMoveSpeed);
             }
 
             
             if(CharacterJump.instanceCharacterJump.isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
             {
-                BetterMovementY(moveHorizontal, moveSpeed);
+                BetterMovementY(moveHorizontal, currentMoveSpeed);
             }
         }
     }
@@ -120,6 +124,18 @@ public class CharacterController : MonoBehaviour
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPow) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * Vector2.down * moveMagnitude);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "SpeedRamp")
+        {
+            currentMoveSpeed = speedUpMoveSpeed;
+        }
+        else
+        {
+            currentMoveSpeed = moveSpeed;
+        }
     }
 
 }

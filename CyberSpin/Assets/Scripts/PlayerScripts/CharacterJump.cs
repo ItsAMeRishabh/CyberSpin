@@ -267,7 +267,7 @@ public class CharacterJump : MonoBehaviour
             rayColor = Color.red;
         }
         Debug.DrawRay(circleCollider2D.bounds.center, Vector2.down * (circleCollider2D.bounds.extents.y + extraHeight));
-        Debug.Log(raycastHit2D.collider);
+        //Debug.Log(raycastHit2D.collider);
         return raycastHit2D.collider != null;
     }
     public bool isGroundedVerticalUp()
@@ -284,7 +284,7 @@ public class CharacterJump : MonoBehaviour
             rayColor = Color.red;
         }
         Debug.DrawRay(circleCollider2D.bounds.center, Vector2.up * (circleCollider2D.bounds.extents.y + extraHeight));
-        Debug.Log(raycastHit2D.collider);
+        //Debug.Log(raycastHit2D.collider);
         return raycastHit2D.collider != null;
     }
 
@@ -302,7 +302,7 @@ public class CharacterJump : MonoBehaviour
             rayColor = Color.red;
         }
         Debug.DrawRay(circleCollider2D.bounds.center, Vector2.left * (circleCollider2D.bounds.extents.y + extraHeight));
-        Debug.Log(raycastHit2D.collider);
+        //Debug.Log(raycastHit2D.collider);
         return raycastHit2D.collider != null;
     }
 
@@ -320,7 +320,7 @@ public class CharacterJump : MonoBehaviour
             rayColor = Color.red;
         }
         Debug.DrawRay(circleCollider2D.bounds.center, Vector2.right * (circleCollider2D.bounds.extents.y + extraHeight));
-        Debug.Log(raycastHit2D.collider);
+        //Debug.Log(raycastHit2D.collider);
         return raycastHit2D.collider != null;
     }
 
