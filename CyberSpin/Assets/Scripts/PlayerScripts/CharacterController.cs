@@ -77,14 +77,7 @@ public class CharacterController : MonoBehaviour
         
         if (!gravityVertical)
         {
-            /*//Player control Mid-Air normal
-            if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
-            {
-                if (rb.velocity.x < 50.0f * moveMagnitude)
-                {
-                    BetterMovementY(moveHorizontal, airSpeed);
-                }
-            }*/
+
             //Player Control On Ground
             if(CharacterJump.instanceCharacterJump.isGroundedHorizontal())
             {
@@ -149,5 +142,14 @@ public class CharacterController : MonoBehaviour
     if (moveHorizontal > 0.1f || moveHorizontal < -0.1f)
     {
         rb.AddForce(new Vector2(moveHorizontal * speed, 0f), ForceMode2D.Force);
+    }
+}*/
+
+/*//Player control Mid-Air normal
+if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
+{
+    if (rb.velocity.x < 50.0f * moveMagnitude)
+    {
+        BetterMovementY(moveHorizontal, airSpeed);
     }
 }*/
