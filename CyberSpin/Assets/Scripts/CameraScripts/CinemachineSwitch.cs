@@ -15,11 +15,11 @@ public class CinemachineSwitch : MonoBehaviour
     //Variables
     private float timer;
     private bool isSwitching;
-    public int currentLevel;
+    
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject victoryScreen;
-    [SerializeField] private Transform[] levelPos;
+    
 
 
     private void Start()
@@ -46,11 +46,11 @@ public class CinemachineSwitch : MonoBehaviour
 
             else
             {
-                currentLevel++;
+                LevelManager.currentLevel++;
                 zoomOutCam.Priority = 0;
                 playerCam.Priority = 1;
                 isSwitching = false;
-                toNextPos();
+                LevelManager.instanceLevelManager.toNextPos();
                 player.SetActive(true);
             }
         }
@@ -66,14 +66,10 @@ public class CinemachineSwitch : MonoBehaviour
         player.SetActive(false);
     }
 
-    //Updating Pos of Player
-    public void toNextPos()
-    {
-        player.transform.position = levelPos[currentLevel - 1].position;
-    }
+    
     public void RetryLevel()
     {
         victoryScreen.SetActive(false);
-        toNextPos();
+        LevelManager.instanceLevelManager.toNextPos();
     }
 }

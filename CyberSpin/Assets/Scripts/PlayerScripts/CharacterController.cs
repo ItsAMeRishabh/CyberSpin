@@ -22,6 +22,7 @@ public class CharacterController : MonoBehaviour
 
     public bool gravityVertical;
 
+
     private void Awake()
     {
         insCharCont = this;
@@ -34,6 +35,12 @@ public class CharacterController : MonoBehaviour
         gravityVertical = true;
 
         currentMoveSpeed = moveSpeed;
+
+        if(LevelManager.hasToUpdate)
+        {
+            LevelManager.instanceLevelManager.toNextPos();
+            LevelManager.hasToUpdate = false;
+        }
     }
 
     void Update()
@@ -131,6 +138,8 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+
+   
 }
 
 

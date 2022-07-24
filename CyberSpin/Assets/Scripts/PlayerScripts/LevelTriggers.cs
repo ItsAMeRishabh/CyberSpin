@@ -8,19 +8,19 @@ public class LevelTriggers : MonoBehaviour
     {
         if(collision.name == "Level1Trigger")
         {
-            CinemachineSwitch.instanceCineSwitch.currentLevel = 1;
+            LevelManager.currentLevel = 1;
         }
         if (collision.tag == "Level2Trigger")
         {
-            CinemachineSwitch.instanceCineSwitch.currentLevel = 2;
+            LevelManager.currentLevel = 2;
         }
         if (collision.tag == "Level3Trigger")
         {
-            CinemachineSwitch.instanceCineSwitch.currentLevel = 3;
+            LevelManager.currentLevel = 3;
         }
         if (collision.tag == "Level4Trigger")
         {
-            CinemachineSwitch.instanceCineSwitch.currentLevel = 4;
+            LevelManager.currentLevel = 4;
         }
     }
 }

@@ -83,7 +83,7 @@ public class CharacterJump : MonoBehaviour
         Debug.Log(airTime);
 
         //CanBoost Check
-        if(CinemachineSwitch.instanceCineSwitch.currentLevel>3)
+        if(LevelManager.currentLevel > 3)
         {
             canBoost = true;
         }

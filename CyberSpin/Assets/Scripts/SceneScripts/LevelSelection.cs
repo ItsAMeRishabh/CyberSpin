@@ -3,24 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class LevelSelection : MonoBehaviour
 {
-    public int nextSceneLoad;
-    public Button[] lvlButtons;
+    private string buttonName;
+    private char levelNumber;
+    private int selectedLevel;
 
-    // Start is called before the first frame update
-    void Start()
+    public void LoadLevel()
     {
-        nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1; 
-        int levelAt = PlayerPrefs.GetInt("levelAt", 2);
-        Debug.Log(lvlButtons[0].name);
-        for(int i = 0; i < lvlButtons.Length ; i++) 
-        {
-            if(i+2 > levelAt)
-            {
-                lvlButtons[i].interactable = false;
-            }
-        }
+        buttonName = EventSystem.current.currentSelectedGameObject.name;
+        levelNumber = buttonName[6];
+        selectedLevel = levelNumber - '0';
+
+        Debug.Log(selectedLevel);
+
+        LevelManager.currentLevel = selectedLevel;
+        LevelManager.hasToUpdate = true;
+
+        SceneManager.LoadScene("Level 1");
+
     }
+
+
 }
