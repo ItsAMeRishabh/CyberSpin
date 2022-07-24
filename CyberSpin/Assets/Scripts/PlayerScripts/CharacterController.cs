@@ -22,6 +22,7 @@ public class CharacterController : MonoBehaviour
 
     public bool gravityVertical;
 
+    public Animator charAnimator;
 
     private void Awake()
     {
@@ -55,6 +56,16 @@ public class CharacterController : MonoBehaviour
         {
             moveMagnitude = 1;
         }
+
+        if(rb.velocity.x > 15.0f || rb.velocity.x < -15.0f)
+        {
+            charAnimator.SetBool("isMoving", true);
+        }
+        else
+        {
+            charAnimator.SetBool("isMoving", false);
+        }
+        
     }
 
     private void FixedUpdate()

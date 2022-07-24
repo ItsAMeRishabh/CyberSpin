@@ -10,17 +10,21 @@ public class LevelTriggers : MonoBehaviour
         {
             LevelManager.currentLevel = 1;
         }
-        if (collision.tag == "Level2Trigger")
+        if (collision.name == "Level2Trigger")
         {
             LevelManager.currentLevel = 2;
         }
-        if (collision.tag == "Level3Trigger")
+        if (collision.name == "Level3Trigger")
         {
             LevelManager.currentLevel = 3;
         }
-        if (collision.tag == "Level4Trigger")
+        if (collision.name == "Level4Trigger")
         {
             LevelManager.currentLevel = 4;
+        }
+        if (collision.name == "Level3DeathTrigger")
+        {
+            LevelManager.instanceLevelManager.toNextPos();
         }
     }
 }
