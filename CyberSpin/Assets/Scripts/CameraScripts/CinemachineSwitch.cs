@@ -16,15 +16,17 @@ public class CinemachineSwitch : MonoBehaviour
     private float timer;
     private bool isSwitching;
     
-
+    //GameObjects
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject victoryScreen;
-    
+    public GameObject victoryScreen;
 
+    private void Awake()
+    {
+        instanceCineSwitch = this;
+    }
 
     private void Start()
     {
-        instanceCineSwitch = this;
         timer = 0f;
     }
 
@@ -33,25 +35,30 @@ public class CinemachineSwitch : MonoBehaviour
         SwitchCamera();
     }
 
+    //Cinemachine Camera Switch Script
     private void SwitchCamera()
     {
         if(isSwitching)
-        {
+        {   
+            //While Timer is positive
             if (timer > 0)
             {
-                zoomOutCam.Priority = 1;
-                playerCam.Priority = 0;
-                timer -= Time.deltaTime;
+                zoomOutCam.Priority = 1;                                //Switch to Zoomed Out Camera
+                playerCam.Priority = 0;                                 //Switch off from Player Camera
+                timer -= Time.deltaTime;                                //Deducting time for every Time.deltaTime
             }
 
             else
             {
-                LevelManager.currentLevel++;
-                zoomOutCam.Priority = 0;
-                playerCam.Priority = 1;
-                isSwitching = false;
-                LevelManager.instanceLevelManager.toNextPos();
-                player.SetActive(true);
+                LevelManager.currentLevel++;                            //Switch to next level
+                zoomOutCam.Priority = 0;                                //Switch off from Zoomed out cam
+                playerCam.Priority = 1;                                 //Switch to Player Cam
+                isSwitching = false;                                    
+                LevelManager.instanceLevelManager.toNextPos();          //Update Character Pos to Next Level
+                ButtonScript.instanceButtonScript.isActivated = false;  
+                ButtonScript.instanceButtonScript.canActivate = false;
+                player.GetComponent<CharacterController>().enabled = true;   //Turn Player Scripts on
+                player.GetComponent<CharacterJump>().enabled = true;
             }
         }
         
@@ -63,13 +70,8 @@ public class CinemachineSwitch : MonoBehaviour
         timer = 2.0f;
         isSwitching = true;
         victoryScreen.SetActive(false);
-        player.SetActive(false);
+        player.GetComponent<CharacterController>().enabled = false;             //Turn Player Scripts off
+        player.GetComponent<CharacterJump>().enabled = false;
     }
-
     
-    public void RetryLevel()
-    {
-        victoryScreen.SetActive(false);
-        LevelManager.instanceLevelManager.toNextPos();
-    }
 }

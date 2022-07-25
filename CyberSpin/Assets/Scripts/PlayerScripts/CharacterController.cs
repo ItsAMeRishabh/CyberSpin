@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
+    //Script Instance
     public static CharacterController insCharCont;
     private Rigidbody2D rb;
 
+    //Move Variables
     private float currentMoveSpeed;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float speedUpMoveSpeed;
@@ -15,13 +17,13 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float accel;
     [SerializeField] private float deccel;
     [SerializeField] private float velPow;
-
     private float moveMagnitude;
-
     private float moveHorizontal;
 
+    //Bools
     public bool gravityVertical;
-
+    
+    //Character Animator 
     public Animator charAnimator;
 
     private void Awake()
@@ -32,22 +34,27 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
+ 
         gravityVertical = true;
 
         currentMoveSpeed = moveSpeed;
 
+        //Executed when script enabled from Level Select Scene
         if(LevelManager.hasToUpdate)
         {
-            LevelManager.instanceLevelManager.toNextPos();
-            LevelManager.hasToUpdate = false;
+            LevelManager.instanceLevelManager.toNextPos();              //Setting Level
+            ButtonScript.instanceButtonScript.canActivate = false;      //ButtonScript Var
+            ButtonScript.instanceButtonScript.isActivated = false;      //ButtonScript Var
+            LevelManager.hasToUpdate = false;                           //Reverting Bool to false
         }
     }
 
     void Update()
     {
+        //Input
         moveHorizontal = Input.GetAxisRaw("Horizontal");
 
+        //if normal grounded or horizontal grounded on right wall
         if(CharacterJump.instanceCharacterJump.isGroundedVerticalUp() || CharacterJump.instanceCharacterJump.isGroundedHorizontalRight())
         {
             moveMagnitude = -1;
@@ -57,6 +64,7 @@ public class CharacterController : MonoBehaviour
             moveMagnitude = 1;
         }
 
+        //Animation Trigger - Moving
         if(rb.velocity.x > 15.0f || rb.velocity.x < -15.0f)
         {
             charAnimator.SetBool("isMoving", true);
@@ -65,7 +73,17 @@ public class CharacterController : MonoBehaviour
         {
             charAnimator.SetBool("isMoving", false);
         }
-        
+
+        //Animation Trigger - Boosting
+        if (CharacterJump.instanceCharacterJump.isBoosting)
+        {
+            charAnimator.SetBool("isBoosting", true);
+        }
+        else
+        {
+            charAnimator.SetBool("isBoosting", false);
+        }
+
     }
 
     private void FixedUpdate()
@@ -110,7 +128,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-    //Horizontal Movement Script
+    //Movement Script Up-Down
     public void BetterMovementX(float moveDirection, float speed)
     {
         float targetSpeed = moveDirection * speed;
@@ -124,6 +142,7 @@ public class CharacterController : MonoBehaviour
         rb.AddForce(movement * Vector2.right * moveMagnitude);
     }
 
+    //Movement Script Left-Right
     public void BetterMovementY(float moveDirection, float speed)
     {
         float targetSpeed = moveDirection * speed;
@@ -137,6 +156,7 @@ public class CharacterController : MonoBehaviour
         rb.AddForce(movement * Vector2.down * moveMagnitude);
     }
 
+    //SpeedRamp Collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "SpeedRamp")
@@ -149,12 +169,10 @@ public class CharacterController : MonoBehaviour
         }
     }
 
-
-   
 }
 
 
-//EMERGENCY CODE
+#region EMERGENCY CODE
 
 //Previous Movement
 /*void HorizontalMove(float speed)
@@ -173,3 +191,5 @@ if (!CharacterJump.instanceCharacterJump.isGroundedHorizontal() && GravityContro
         BetterMovementY(moveHorizontal, airSpeed);
     }
 }*/
+
+#endregion

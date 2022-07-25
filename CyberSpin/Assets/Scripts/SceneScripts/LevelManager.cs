@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
 
     public Transform[] levelPos;
 
-    private void Start()
+    private void Awake()
     {
         instanceLevelManager = this;
     }
@@ -22,7 +22,16 @@ public class LevelManager : MonoBehaviour
     //Updating Pos of Player
     public void toNextPos()
     {
+        Debug.Log(currentLevel);
         rbChar.transform.position = levelPos[currentLevel - 1].position;
     }
 
+    public void RetryLevel()
+    {
+        CinemachineSwitch.instanceCineSwitch.victoryScreen.SetActive(false);
+        ButtonScript.instanceButtonScript.isActivated = false;
+        ButtonScript.instanceButtonScript.canActivate = false;
+        toNextPos();
+    }
+    
 }

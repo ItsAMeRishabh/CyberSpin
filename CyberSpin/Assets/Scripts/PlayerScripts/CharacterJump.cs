@@ -33,7 +33,7 @@ public class CharacterJump : MonoBehaviour
 
     //BOOLS
     public bool canBoost;
-    [SerializeField] private bool isBoosting;
+    public bool isBoosting;
 
     public float currentGravity;
 
@@ -80,13 +80,13 @@ public class CharacterJump : MonoBehaviour
 
         //BOOSTER PARTICLE POSITION SET
         boosterSystem.transform.position = rb.transform.position;
-        Debug.Log(airTime);
 
-        //CanBoost Check
         if(LevelManager.currentLevel > 3)
         {
             canBoost = true;
         }
+
+        
     }
 
     private void FixedUpdate()
@@ -129,7 +129,7 @@ public class CharacterJump : MonoBehaviour
 
 
         //MID_AIR BOOSTING
-        #region Mid-Air Boosting
+        #region Mid-Air Boosting Check
         else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
         {
             currentStamina -= Time.deltaTime;
@@ -208,7 +208,8 @@ public class CharacterJump : MonoBehaviour
 
     }
 
-    //BOOST MOVEMENT
+    //BOOST MOVEMENT SCRIPT
+    #region BoostMovement
     void BetterBoostMovement()
     {
         float targetSpeed = boosterForce;
@@ -221,7 +222,7 @@ public class CharacterJump : MonoBehaviour
 
         rb.AddForce(movement * Vector2.up);
     }
-
+    #endregion
 
     //RAYCAST BASED GROUND CHECKs
     #region New GroundChecks

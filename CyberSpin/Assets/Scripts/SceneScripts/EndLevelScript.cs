@@ -6,8 +6,8 @@ using UnityEngine.Playables;
 
 public class EndLevelScript : MonoBehaviour
 {
-    public GameObject victoryScreen;
-
+    //Victory Canvas
+    public GameObject victoryScreen; 
     private void OnTriggerEnter2D(Collider2D other) 
     {   
         if (other.gameObject.tag == "Player") 

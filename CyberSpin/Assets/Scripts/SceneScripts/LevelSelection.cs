@@ -13,18 +13,14 @@ public class LevelSelection : MonoBehaviour
 
     public void LoadLevel()
     {
-        buttonName = EventSystem.current.currentSelectedGameObject.name;
-        levelNumber = buttonName[6];
-        selectedLevel = levelNumber - '0';
+        buttonName = EventSystem.current.currentSelectedGameObject.name;  //Check Name of level pressed
+        levelNumber = buttonName[6];                                      //Checking Number from level string
+        selectedLevel = levelNumber - '0';                                //String -> int
 
-        Debug.Log(selectedLevel);
+        LevelManager.currentLevel = selectedLevel;                        //Setting to Level to load
+        LevelManager.hasToUpdate = true;                                  //Has to (?) update variables on level load
 
-        LevelManager.currentLevel = selectedLevel;
-        LevelManager.hasToUpdate = true;
-
-        SceneManager.LoadScene("Level 1");
-
+        SceneManager.LoadScene("Level 1");                                //Loading Levels Scene
     }
-
 
 }
