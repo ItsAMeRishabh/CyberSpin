@@ -22,6 +22,7 @@ public class JumpPad : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            CharacterJump.instanceCharacterJump.squashAnimator.SetTrigger("Jumping");
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * currentBounce, ForceMode2D.Impulse);
         }
     }
