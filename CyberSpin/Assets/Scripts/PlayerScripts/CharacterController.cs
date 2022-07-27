@@ -7,6 +7,7 @@ public class CharacterController : MonoBehaviour
     //Script Instance
     public static CharacterController insCharCont;
     private Rigidbody2D rb;
+    [SerializeField] private GameObject childObject;
 
     //Move Variables
     private float currentMoveSpeed;
@@ -25,6 +26,8 @@ public class CharacterController : MonoBehaviour
     
     //Character Animator 
     [SerializeField] private Animator charAnimator;
+
+    public Vector3 offsetPosition;
 
 
     private void Awake()
@@ -84,11 +87,14 @@ public class CharacterController : MonoBehaviour
         {
             charAnimator.SetBool("isBoosting", false);
         }
+
+        
     }
 
     private void FixedUpdate()
-    {
-        if(gravityVertical)
+    {   
+
+        if (gravityVertical)
         {
             //Player control Mid-Air normal
             if (!CharacterJump.instanceCharacterJump.isGroundedVertical() && GravityController.instanceGravityController.gravityDirection ==0)
@@ -126,6 +132,12 @@ public class CharacterController : MonoBehaviour
                 BetterMovementY(moveHorizontal, currentMoveSpeed);
             }
         }
+    }
+
+    private void LateUpdate()
+    {
+        //childObject.transform.localScale = gameObject.transform.localScale;
+        childObject.transform.position = gameObject.transform.position + offsetPosition;
     }
 
     //Movement Script Up-Down

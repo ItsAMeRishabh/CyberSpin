@@ -88,7 +88,6 @@ public class CharacterJump : MonoBehaviour
         //    canBoost = true;
         //}
 
-        
     }
 
     private void FixedUpdate()
@@ -210,6 +209,15 @@ public class CharacterJump : MonoBehaviour
             CharacterController.insCharCont.gravityVertical = true;
         }
         #endregion
+
+        if(isBoosting)
+        {
+            rb.angularDrag = 2f;
+        }
+        else
+        {
+            rb.angularDrag = 0.05f;
+        }
 
     }
 
