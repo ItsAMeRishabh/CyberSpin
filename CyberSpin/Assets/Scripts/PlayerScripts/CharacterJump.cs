@@ -56,7 +56,7 @@ public class CharacterJump : MonoBehaviour
         currentStamina = maxStamina;
         StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
 
-        canBoost = false;
+        canBoost = true;
     }
 
     private void Update()
@@ -81,10 +81,10 @@ public class CharacterJump : MonoBehaviour
         //BOOSTER PARTICLE POSITION SET
         boosterSystem.transform.position = rb.transform.position;
 
-        if(LevelManager.currentLevel > 3)
-        {
-            canBoost = true;
-        }
+        //if(LevelManager.currentLevel > 3)
+        //{
+        //    canBoost = true;
+        //}
 
         
     }
