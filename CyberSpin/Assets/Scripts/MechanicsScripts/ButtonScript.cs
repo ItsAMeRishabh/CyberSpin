@@ -38,6 +38,19 @@ public class ButtonScript : MonoBehaviour
             countdownTimer = 0f;
         }
 
+        if (canActivate)
+        {
+            CharacterController.insCharCont.ballTrailRenderer.enabled = true;
+        }
+        else
+        {
+            CharacterController.insCharCont.ballTrailRenderer.enabled = false;
+        }
+        if(isActivated)
+        {
+            CharacterController.insCharCont.ballTrailRenderer.enabled = false;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -29,16 +29,17 @@ public class CharacterController : MonoBehaviour
 
     public Vector3 offsetPosition;
 
+    public TrailRenderer ballTrailRenderer;
 
     private void Awake()
     {
         insCharCont = this;
+        rb = GetComponent<Rigidbody2D>();
+        ballTrailRenderer = gameObject.GetComponent<TrailRenderer>();
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
- 
         gravityVertical = true;
 
         currentMoveSpeed = moveSpeed;
