@@ -24,7 +24,8 @@ public class CharacterController : MonoBehaviour
     public bool gravityVertical;
     
     //Character Animator 
-    public Animator charAnimator;
+    [SerializeField] private Animator charAnimator;
+
 
     private void Awake()
     {
@@ -83,7 +84,6 @@ public class CharacterController : MonoBehaviour
         {
             charAnimator.SetBool("isBoosting", false);
         }
-
     }
 
     private void FixedUpdate()

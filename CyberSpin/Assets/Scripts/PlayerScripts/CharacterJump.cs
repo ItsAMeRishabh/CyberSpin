@@ -39,6 +39,8 @@ public class CharacterJump : MonoBehaviour
 
     public ParticleSystem boosterSystem;
 
+    [SerializeField] private Animator squashAnimator;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -102,13 +104,16 @@ public class CharacterJump : MonoBehaviour
         {
 
             rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
+            squashAnimator.SetTrigger("Jumping");
 
         }
+
         //horizontal left
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
 
             rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
+            squashAnimator.SetTrigger("Jumping");
 
         }
         //vertical up
@@ -116,14 +121,14 @@ public class CharacterJump : MonoBehaviour
         {
 
             rb.AddForce(new Vector2(rb.velocity.x, -jumpForceX), ForceMode2D.Impulse);
-
+            squashAnimator.SetTrigger("Jumping");
         }
         //horizontal right
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
         {
 
             rb.AddForce(new Vector2(-jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
-
+            squashAnimator.SetTrigger("Jumping");
         }
         #endregion
 
