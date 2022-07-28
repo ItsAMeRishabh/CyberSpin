@@ -3482,7 +3482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   factoryBackground: {fileID: 290045529}
-  parallaxEffectMul: {x: -0.02, y: 0}
+  parallaxEffectMul: {x: -0.2, y: 0}
 --- !u!1 &295620868
 GameObject:
   m_ObjectHideFlags: 0
