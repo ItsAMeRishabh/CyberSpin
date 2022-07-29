@@ -54,9 +54,11 @@ public class CinemachineSwitch : MonoBehaviour
                 zoomOutCam.Priority = 0;                                //Switch off from Zoomed out cam
                 playerCam.Priority = 1;                                 //Switch to Player Cam
                 LevelManager.instanceLevelManager.toNextPos();          //Update Character Pos to Next Level
-                isSwitching = false;                                    
+                isSwitching = false;
+                
                 ButtonScript.instanceButtonScript.isActivated = false;  
                 ButtonScript.instanceButtonScript.canActivate = false;
+
                 player.GetComponent<CharacterController>().enabled = true;   //Turn Player Scripts on
                 player.GetComponent<CharacterJump>().enabled = true;
             }

@@ -10,7 +10,8 @@ public class ButtonScript : MonoBehaviour
     public bool canActivate;
     public bool isActivated;
 
-    private float level1Countdown;
+    private float level2Countdown;
+    private float level3Countdown;
 
     private void Awake()
     {
@@ -21,9 +22,11 @@ public class ButtonScript : MonoBehaviour
     {
         countdownTimer = 0f;
         canActivate = false;
+
         isActivated = false;
 
-        level1Countdown = 10f;
+        level2Countdown = 10f;
+        level3Countdown = 5f;
     }
     private void Update()
     {
@@ -50,21 +53,36 @@ public class ButtonScript : MonoBehaviour
         {
             CharacterController.insCharCont.ballTrailRenderer.enabled = false;
         }
-
+        Debug.Log(isActivated); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.name == "Button")
+        if(collision.name == "BL2S")
         {
-            countdownTimer = level1Countdown;
+            countdownTimer = level2Countdown;
         }
 
-        if (collision.name == "ButtonTrigger")
+        if (collision.name == "BL2E")
         {
             if(canActivate)
             {
                 isActivated = true;
+                canActivate = false;
+            }
+        }
+
+        if (collision.name == "BL3S")
+        {
+            countdownTimer = level3Countdown;
+        }
+
+        if (collision.name == "BL3E")
+        {
+            if (canActivate)
+            {
+                isActivated = true;
+                canActivate = false;
             }
         }
     }
