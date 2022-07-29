@@ -36,7 +36,7 @@ public class CharacterJump : MonoBehaviour
     public bool isBoosting;
 
     public float currentGravity;
-
+    
     public ParticleSystem boosterSystem;
 
     public Animator squashAnimator;
@@ -58,7 +58,7 @@ public class CharacterJump : MonoBehaviour
         currentStamina = maxStamina;
         StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
 
-        canBoost = true;
+        canBoost = false;
     }
 
     private void Update()
@@ -83,10 +83,10 @@ public class CharacterJump : MonoBehaviour
         //BOOSTER PARTICLE POSITION SET
         boosterSystem.transform.position = rb.transform.position;
 
-        //if(LevelManager.currentLevel > 3)
-        //{
-        //    canBoost = true;
-        //}
+        if(LevelManager.currentLevel > 3)
+        {
+            canBoost = true;
+        }
 
     }
 

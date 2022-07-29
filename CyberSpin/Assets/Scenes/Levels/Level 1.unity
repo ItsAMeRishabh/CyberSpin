@@ -2878,7 +2878,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214513855}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -60.57, y: -4.49, z: 0}
+  m_LocalPosition: {x: -60.57, y: 1.12, z: 0}
   m_LocalScale: {x: 2.437787, y: 2.293992, z: 1.812}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4486,8 +4486,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 30
-      minScalar: 20
+      scalar: 15
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8579,7 +8579,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.735849, b: 0.018993493, a: 1}
   m_FlipX: 0
@@ -10007,7 +10007,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 480685286}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 227.74055, y: -44.00078, z: -10}
+  m_LocalPosition: {x: 9.740555, y: -110.00078, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10661,7 +10661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536391353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 420, y: 56, z: -10}
+  m_LocalPosition: {x: 202, y: -10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18389,7 +18389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433661384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.75, y: -47.237, z: 0}
+  m_LocalPosition: {x: -39.51, y: -47.22, z: 0}
   m_LocalScale: {x: 2.0641, y: 1.266, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18462,7 +18462,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.735849, b: 0.018993493, a: 1}
   m_FlipX: 0
@@ -20095,11 +20095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 678415894477318438, guid: 29ae0a6396f5f4c48b0a38cf1a2223a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 420
+      value: 202
       objectReference: {fileID: 0}
     - target: {fileID: 678415894477318438, guid: 29ae0a6396f5f4c48b0a38cf1a2223a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 56
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 678415894477318438, guid: 29ae0a6396f5f4c48b0a38cf1a2223a4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21778,8 +21778,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 30
-      minScalar: 20
+      scalar: 15
+      minScalar: 10
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -28576,7 +28576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!198 &2060178641
 ParticleSystem:
   m_ObjectHideFlags: 0
