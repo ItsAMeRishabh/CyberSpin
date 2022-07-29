@@ -15,6 +15,7 @@ public class TutorialsUI1 : MonoBehaviour
     private float timer1;
     private float timer2;
     private float timer3;
+    private float timer4;
 
     private float value;
 
@@ -29,8 +30,9 @@ public class TutorialsUI1 : MonoBehaviour
     private void Start()
     {
         timer1 = 1.5f;
-        timer2 = 5f;
+        timer2 = 1f;
         timer3 = 2f;
+        timer4 = 2f;
 
         value = 0;
 
@@ -54,6 +56,12 @@ public class TutorialsUI1 : MonoBehaviour
             Level1JumpTut.SetActive(true);
 
             jumpTutorial();
+        }
+
+        if(LevelManager.currentLevel != 1)
+        {
+            Level1MoveTut.SetActive(false);
+            Level1JumpTut.SetActive(false);
         }
     }
 
@@ -90,8 +98,6 @@ public class TutorialsUI1 : MonoBehaviour
 
         if (value == 1)
         {
-            LVL1tutorialsUIAnim.SetBool("isTurnedOn", false);
-            LVL1tutorialsUIAnim.SetBool("isTurnedOff", true);
 
             if (timer3 > 0)
             {
@@ -99,11 +105,23 @@ public class TutorialsUI1 : MonoBehaviour
             }
             else
             {
-                Level1MoveTut.SetActive(false);
+                LVL1tutorialsUIAnim.SetBool("isTurnedOn", false);
+                LVL1tutorialsUIAnim.SetBool("isTurnedOff", true);
+
                 timer3 = 0;
-                moveDone = true;
-                jumpDone = false;
-                ResetValues();
+
+                if (timer4 > 0)
+                {
+                    timer4 -= Time.deltaTime;
+                }
+                else
+                {
+                    Level1MoveTut.SetActive(false);
+                    moveDone = true;
+                    jumpDone = false;
+                    timer4 = 0f;
+                    ResetValues();
+                }
             }
         }
     }
@@ -142,19 +160,29 @@ public class TutorialsUI1 : MonoBehaviour
 
         if (value == 1)
         {
-            LVL1tutorialsUIAnimJump.SetBool("isTurnedOn", false);
-            LVL1tutorialsUIAnimJump.SetBool("isTurnedOff", true);
-
             if (timer3 > 0)
             {
                 timer3 -= Time.deltaTime;
             }
             else
             {
-                Level1JumpTut.SetActive(false);
+                LVL1tutorialsUIAnimJump.SetBool("isTurnedOn", false);
+                LVL1tutorialsUIAnimJump.SetBool("isTurnedOff", true);
+                
                 timer3 = 0;
-                moveDone = true;
-                jumpDone = true;
+
+                if (timer4 > 0)
+                {
+                    timer4 -= Time.deltaTime;
+                }
+                else
+                {
+                    Level1JumpTut.SetActive(false);
+                    moveDone = true;
+                    jumpDone = true;
+                    timer4 = 0f;
+                    ResetValues();
+                }
             }
         }
     }
@@ -162,8 +190,9 @@ public class TutorialsUI1 : MonoBehaviour
     private void ResetValues()
     {
         timer1 = 2f;
-        timer2 = 5f;
+        timer2 = 1f;
         timer3 = 2f;
+        timer4 = 2f;
 
         value = 0;
     }
