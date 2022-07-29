@@ -21,7 +21,7 @@ public class Level3ForceField : MonoBehaviour
     {
         if (ButtonScript.instanceButtonScript.isActivated)
         {
-            forceField.GetComponent<ForceFieldScript>().magnitude = 1f;
+            forceField.GetComponent<ForceFieldScript>().magnitude = 2f;
 
             forceFieldParticlesDown.SetActive(false);
             forceFieldParticlesUp.SetActive(true);

@@ -61,6 +61,8 @@ public class CinemachineSwitch : MonoBehaviour
 
                 player.GetComponent<CharacterController>().enabled = true;   //Turn Player Scripts on
                 player.GetComponent<CharacterJump>().enabled = true;
+
+                timer = 0;
             }
         }
         
