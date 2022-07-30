@@ -13264,7 +13264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acea45b1ce6318c419ec4accbec45403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounce: 70
+  bounce: 65
   currentBounce: 0
 --- !u!61 &755473314
 BoxCollider2D:

@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class CharacterJump : MonoBehaviour
 {
+    //Script Instance
     public static CharacterJump instanceCharacterJump;
-
+    
+    //Character Components
     Rigidbody2D rb;
     [SerializeField] private CircleCollider2D circleCollider2D;
 
@@ -15,13 +17,13 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private float jumpForceY;
     [SerializeField] private float jumpForceX;
 
-
     //MID AIR ACCEL & DECEL
     private float airTime;
     [SerializeField]private float accel;
     [SerializeField]private float deccel;
     [SerializeField]private float velPow;
     [SerializeField]private float fallMultiplier;
+    public float currentGravity;
 
     //STAMINA
     private float currentStamina;
@@ -31,21 +33,18 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask gravityLayer;
 
-    private float coyoteTime = 0.2f;
+    //Coyote Variables
+    private float coyoteTime = 0.15f;
     private float coyoteTimeCounter;
-
 
     //BOOLS
     public bool canBoost;
     public bool isBoosting;
-
-    public float currentGravity;
     
+    //Misc
     [SerializeField]private ParticleSystem boosterSystem;
-
     public Animator squashAnimator;
 
-    public LayerMask mask;
 
     private void Awake()
     {
@@ -59,8 +58,6 @@ public class CharacterJump : MonoBehaviour
         //isJumping = false;
         isBoosting = false;
 
-        //rb.gravityScale = currentGravity;
-
         currentStamina = maxStamina;
         StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
 
@@ -69,13 +66,11 @@ public class CharacterJump : MonoBehaviour
 
     private void Update()
     {
-
         //MODIFIED FALL Y
         if (rb.velocity.y < 0 && !isBoosting)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-
 
         //Air Time Y
         if (!isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
@@ -84,9 +79,7 @@ public class CharacterJump : MonoBehaviour
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
         }
 
-        //BOOSTER PARTICLE POSITION SET
-        boosterSystem.transform.position = rb.transform.position;
-
+        //Can boost if Level > 3
         if(LevelManager.currentLevel > 3)
         {
             canBoost = true;
@@ -97,6 +90,9 @@ public class CharacterJump : MonoBehaviour
         {
             coyoteTimeCounter = 0f;
         }
+
+        //BOOSTER PARTICLE POSITION SET
+        boosterSystem.transform.position = rb.transform.position;
     }
 
     private void FixedUpdate()
@@ -104,14 +100,12 @@ public class CharacterJump : MonoBehaviour
         //GRAVITY SCALE
         rb.gravityScale = currentGravity;
 
-
         //NORMAL JUMP
         #region NormalJump
 
         //vertical down Coyote Implemented
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0) 
         {
-
             rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
             squashAnimator.SetTrigger("Jumping");
             FindObjectOfType<AudioManager>().Play("Jump");
@@ -214,23 +208,21 @@ public class CharacterJump : MonoBehaviour
         #region Reset Gravity Scale When !Grounded
         if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
-            GravityController.instanceGravityController.gravityDirection = 0;
-            CharacterController.insCharCont.gravityVertical = true;
+            ResetGravityDirection();
         }
 
         if (!isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
         {
-            GravityController.instanceGravityController.gravityDirection = 0;
-            CharacterController.insCharCont.gravityVertical = true;
+            ResetGravityDirection();
         }
 
         if (!isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
         {
-            GravityController.instanceGravityController.gravityDirection = 0;
-            CharacterController.insCharCont.gravityVertical = true;
+            ResetGravityDirection();
         }
         #endregion
 
+        //More Angular Drag While Boosting
         if(isBoosting)
         {
             rb.angularDrag = 2f;
@@ -260,6 +252,8 @@ public class CharacterJump : MonoBehaviour
 
     //RAYCAST BASED GROUND CHECKs
     #region New GroundChecks
+
+    //Down To Up Movement
     public bool isGroundedVertical()
     {
         float extraHeight = 0.1f;
@@ -278,6 +272,7 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
 
+    //Up To Down Movement
     public bool isGroundedVerticalUp()
     {
         float extraHeight = 0.1f;
@@ -296,6 +291,7 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
 
+    //Left To Right Movement
     public bool isGroundedHorizontal()
     {
         float extraHeight = 0.1f;
@@ -314,6 +310,7 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
 
+    //Right To Left Movement
     public bool isGroundedHorizontalRight()
     {
         float extraHeight = 0.1f;
@@ -341,8 +338,16 @@ public class CharacterJump : MonoBehaviour
         }
     }
 
+    //Reset Direction of gravity when jumping from Non-Vertical Platforms
+    //Accessed in FixedUpdate
+    private void ResetGravityDirection()
+    {
+        GravityController.instanceGravityController.gravityDirection = 0;
+        CharacterController.insCharCont.gravityVertical = true;
+    }
+
     //Old GroundCheck Code
-    #region OldScript
+    #region BackUp
     /*private void OnTriggerEnter2D(Collider2D collision)
    {
        if (collision.gameObject.tag == "Ground")

@@ -23,8 +23,6 @@ public class ScrollerScript : MonoBehaviour
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
         Vector2 myVector = new Vector3(deltaMovement.x * parallaxEffectMul.x, deltaMovement.y * parallaxEffectMul.y);
 
-        //transform.position += myVector;
-
         factoryBackground.uvRect = new Rect(factoryBackground.uvRect.position + myVector * Time.deltaTime, factoryBackground.uvRect.size);
         lastCameraPosition = cameraTransform.position;
     }

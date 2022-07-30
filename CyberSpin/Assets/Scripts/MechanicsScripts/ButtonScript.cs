@@ -53,7 +53,6 @@ public class ButtonScript : MonoBehaviour
         {
             CharacterController.insCharCont.ballTrailRenderer.enabled = false;
         }
-        Debug.Log(isActivated); 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
