@@ -31,6 +31,9 @@ public class CharacterJump : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask gravityLayer;
 
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
 
     //BOOLS
     public bool canBoost;
@@ -66,14 +69,12 @@ public class CharacterJump : MonoBehaviour
 
     private void Update()
     {
-        //Fall Modifiers
-        #region FallModifiers
+
         //MODIFIED FALL Y
         if (rb.velocity.y < 0 && !isBoosting)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        #endregion
 
 
         //Air Time Y
@@ -91,6 +92,11 @@ public class CharacterJump : MonoBehaviour
             canBoost = true;
         }
 
+        //Coyote Time Restrict
+        if(rb.velocity.y > 5f && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            coyoteTimeCounter = 0f;
+        }
     }
 
     private void FixedUpdate()
@@ -101,14 +107,14 @@ public class CharacterJump : MonoBehaviour
 
         //NORMAL JUMP
         #region NormalJump
-        //vertical down
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
+
+        //vertical down Coyote Implemented
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0) 
         {
 
             rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
             squashAnimator.SetTrigger("Jumping");
             FindObjectOfType<AudioManager>().Play("Jump");
-
         }
 
         //horizontal left
@@ -158,12 +164,20 @@ public class CharacterJump : MonoBehaviour
 
         //Ground Check Bool Updates
         #region Grounded Check
+
+        //Implemented Coyote Time
         if (isGroundedVertical())
         {
             GravityController.instanceGravityController.gravityDirection = 0;
             CharacterController.insCharCont.gravityVertical = true;
             currentStamina = maxStamina;
             airTime = 0;
+
+            coyoteTimeCounter = coyoteTime;               
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
         }
 
         if (isGroundedHorizontal())
