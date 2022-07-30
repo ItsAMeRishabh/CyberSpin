@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,9 +38,11 @@ public class CharacterJump : MonoBehaviour
 
     public float currentGravity;
     
-    public ParticleSystem boosterSystem;
+    [SerializeField]private ParticleSystem boosterSystem;
 
     public Animator squashAnimator;
+
+    public LayerMask mask;
 
     private void Awake()
     {
@@ -104,6 +107,7 @@ public class CharacterJump : MonoBehaviour
 
             rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
             squashAnimator.SetTrigger("Jumping");
+            FindObjectOfType<AudioManager>().Play("Jump");
 
         }
 
@@ -164,6 +168,7 @@ public class CharacterJump : MonoBehaviour
 
         if (isGroundedHorizontal())
         {
+            //FindObjectOfType<AudioManager>().Play("Magnet Wall");
             GravityController.instanceGravityController.gravityDirection = 1;
             CharacterController.insCharCont.gravityVertical = false;
             currentStamina = maxStamina;
@@ -172,6 +177,7 @@ public class CharacterJump : MonoBehaviour
 
         if (isGroundedVerticalUp())
         {
+            //FindObjectOfType<AudioManager>().Play("Magnet Wall");
             GravityController.instanceGravityController.gravityDirection = 2;
             CharacterController.insCharCont.gravityVertical = true;
             currentStamina = maxStamina;
@@ -180,6 +186,7 @@ public class CharacterJump : MonoBehaviour
 
         if (isGroundedHorizontalRight())
         {
+            //FindObjectOfType<AudioManager>().Play("Magnet Wall");
             GravityController.instanceGravityController.gravityDirection = 3;
             CharacterController.insCharCont.gravityVertical = false;
             currentStamina = maxStamina;
@@ -189,6 +196,7 @@ public class CharacterJump : MonoBehaviour
 
 
         //IF NOT GROUNDED. RESET GRAVITY SCALE
+        //Make Function
         #region Reset Gravity Scale When !Grounded
         if (!isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
         {
@@ -310,9 +318,17 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
     #endregion
+    
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.name == "GravityWall")
+        {
+            FindObjectOfType<AudioManager>().Play("Magnet Wall");
+        }
+    }
 
     //Old GroundCheck Code
-    #region
+    #region OldScript
     /*private void OnTriggerEnter2D(Collider2D collision)
    {
        if (collision.gameObject.tag == "Ground")

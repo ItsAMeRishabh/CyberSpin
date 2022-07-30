@@ -24,6 +24,7 @@ public class JumpPad : MonoBehaviour
         {
             CharacterJump.instanceCharacterJump.squashAnimator.SetTrigger("Jumping");
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * currentBounce, ForceMode2D.Impulse);
+            FindObjectOfType<AudioManager>().Play("Jump Pad");
         }
     }
 }
