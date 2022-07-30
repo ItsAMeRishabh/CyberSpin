@@ -6,12 +6,12 @@ public class ButtonScript : MonoBehaviour
 {
     public static ButtonScript instanceButtonScript;
 
-    private float countdownTimer;
+    public float countdownTimer;
     public bool canActivate;
     public bool isActivated;
 
     private float level2Countdown;
-    private float level3Countdown;
+    public float level3Countdown;
 
     private void Awake()
     {
