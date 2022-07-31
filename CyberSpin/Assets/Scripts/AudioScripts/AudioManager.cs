@@ -19,10 +19,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        Play("Background Music");
-    }
+    // void Start()
+    // {
+    //     Play("Background Music");
+    // }
     public void  Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);

@@ -8,6 +8,8 @@ public class SceneManagement : MonoBehaviour
 {
   public Animator transition;
 
+  public Animator musicAnim;
+
   public float transitionTime = 1f;
 
   public void ChangeScene(int sceneIndex)
@@ -23,6 +25,8 @@ public class SceneManagement : MonoBehaviour
   IEnumerator LoadLevel(int sceneIndex)
   {
     transition.SetTrigger("Start");
+
+    musicAnim.SetTrigger("FadeOut");
 
     yield return new WaitForSeconds(transitionTime);
 
