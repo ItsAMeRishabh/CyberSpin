@@ -20,10 +20,23 @@ public class LevelManager : MonoBehaviour
         instanceLevelManager = this;
     }
 
+    private void Update()
+    {
+        if(currentLevel == null)
+        {
+            toNextPos();
+        }
+    }
+
+
     //Updating Pos of Position
     public void toNextPos()
     {
         Debug.Log(currentLevel);
+        ButtonScript.instanceButtonScript.isActivated = false;
+        ButtonScript.instanceButtonScript.canActivate = false;
+        ButtonScript.instanceButtonScript.countdownTimer = 0f;
+
         rbChar.transform.position = levelPos[currentLevel - 1].position;
     }
 
@@ -35,5 +48,4 @@ public class LevelManager : MonoBehaviour
         ButtonScript.instanceButtonScript.canActivate = false;
         toNextPos();
     }
-    
 }

@@ -11,7 +11,7 @@ public class Level3ForceField : MonoBehaviour
 
     private void Start()
     {
-        forceField.GetComponent<ForceFieldScript>().magnitude = 1f;
+        forceField.GetComponent<ForceFieldScript>().magnitude = -1f;
 
         forceFieldParticlesDown.SetActive(true);
         forceFieldParticlesUp.SetActive(false);
