@@ -35,16 +35,16 @@ public class LevelTriggers : MonoBehaviour
         {
             LevelManager.instanceLevelManager.toNextPos();
 
-            ButtonScript.instanceButtonScript.level3Countdown = 5f;
-            ButtonScript.instanceButtonScript.countdownTimer = 0f;
-
-            ButtonScript.instanceButtonScript.canActivate = false;
-            ButtonScript.instanceButtonScript.isActivated = false;
+            DeathCount.instanceDeathCount.currentDeaths++;
+            DeathCount.instanceDeathCount.UpdateDeaths();
         }
 
         if (collision.name == "Level4DeathTrigger")
         {
             LevelManager.instanceLevelManager.toNextPos();
+
+            DeathCount.instanceDeathCount.currentDeaths++;
+            DeathCount.instanceDeathCount.UpdateDeaths();
         }
     }
 }

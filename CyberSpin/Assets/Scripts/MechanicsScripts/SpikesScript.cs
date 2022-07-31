@@ -10,16 +10,8 @@ public class SpikesScript : MonoBehaviour
         {
             LevelManager.instanceLevelManager.toNextPos();
 
-            if(LevelManager.currentLevel == 3)
-            {
-                ButtonScript.instanceButtonScript.level3Countdown = 5f;
-                ButtonScript.instanceButtonScript.countdownTimer = 0f;
-
-                ButtonScript.instanceButtonScript.canActivate = false;
-                ButtonScript.instanceButtonScript.isActivated = false;
-            }
-            
-
+            DeathCount.instanceDeathCount.currentDeaths++;
+            DeathCount.instanceDeathCount.UpdateDeaths();
         }
     }
 }

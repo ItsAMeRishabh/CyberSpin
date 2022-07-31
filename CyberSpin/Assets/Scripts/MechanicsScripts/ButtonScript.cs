@@ -13,8 +13,8 @@ public class ButtonScript : MonoBehaviour
     private float level2Countdown;
     public float level3Countdown;
 
-    private float level4Countdown1;
-    private float level4Countdown2;
+    public float level4Countdown1;
+    public float level4Countdown2;
 
     private bool secondButtonPressed;
 
