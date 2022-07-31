@@ -13,6 +13,7 @@ public class EndLevelScript : MonoBehaviour
         if (other.gameObject.tag == "Player") 
         {
             victoryScreen.SetActive(true);
+            StarsUI.instanceStarsUI.SetStars();
         }
     }
 }

@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Rigidbody2D rbChar;
 
     public Transform[] levelPos;
+    public GameObject[] starsObj;
     public static int currentLevel;
 
     public static bool hasToUpdate;
@@ -43,6 +44,9 @@ public class LevelManager : MonoBehaviour
         ButtonScript.instanceButtonScript.canActivate = false;
         ButtonScript.instanceButtonScript.countdownTimer = 0f;
 
+        StarsUI.instanceStarsUI.ResetStars();
+        ResetStarsObject();
+
         if (currentLevel == 4 && lvl4CheckpointTaken)
         {
             rbChar.transform.position = checkpointLevel4.transform.position;
@@ -50,6 +54,16 @@ public class LevelManager : MonoBehaviour
         else
         {
             rbChar.transform.position = levelPos[currentLevel - 1].position;
+        }
+    }
+
+    public void ResetStarsObject()
+    {
+        for(int i = 0;i<starsObj.Length;i++)
+        {
+
+            starsObj[i].SetActive(true);
+
         }
     }
 

@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - EndLevel
   - SpeedRamp
+  - Star
   layers:
   - Default
   - TransparentFX

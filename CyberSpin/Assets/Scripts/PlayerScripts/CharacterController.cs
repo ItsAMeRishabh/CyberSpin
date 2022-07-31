@@ -187,6 +187,16 @@ public class CharacterController : MonoBehaviour
         {
             CountDownTimer.instanceCountdownTimer.EndTimer();
         }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Star")
+        {
+            StarsUI.instanceStarsUI.currentStars++;
+            collision.gameObject.SetActive(false);
+        }
     }
 
 }
