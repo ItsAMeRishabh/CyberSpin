@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
@@ -48,7 +49,7 @@ public class SettingsMenu : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("Volume", MathF.Log10(volume) * 20);
+        audioMixer.SetFloat("Volume", volume);
     }
 
     public void SetQuality(int qualityIndex)
