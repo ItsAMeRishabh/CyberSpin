@@ -82,7 +82,7 @@ public class CharacterJump : MonoBehaviour
         //Can boost if Level > 3
         if(LevelManager.currentLevel > 3)
         {
-            canBoost = true;
+            canBoost = false;
         }
 
         //Coyote Time Restrict

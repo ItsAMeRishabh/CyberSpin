@@ -10,11 +10,15 @@ public class SpikesScript : MonoBehaviour
         {
             LevelManager.instanceLevelManager.toNextPos();
 
-            ButtonScript.instanceButtonScript.level3Countdown = 5f;
-            ButtonScript.instanceButtonScript.countdownTimer = 0f;
+            if(LevelManager.currentLevel == 3)
+            {
+                ButtonScript.instanceButtonScript.level3Countdown = 5f;
+                ButtonScript.instanceButtonScript.countdownTimer = 0f;
 
-            ButtonScript.instanceButtonScript.canActivate = false;
-            ButtonScript.instanceButtonScript.isActivated = false;
+                ButtonScript.instanceButtonScript.canActivate = false;
+                ButtonScript.instanceButtonScript.isActivated = false;
+            }
+            
 
         }
     }

@@ -41,5 +41,10 @@ public class LevelTriggers : MonoBehaviour
             ButtonScript.instanceButtonScript.canActivate = false;
             ButtonScript.instanceButtonScript.isActivated = false;
         }
+
+        if (collision.name == "Level4DeathTrigger")
+        {
+            LevelManager.instanceLevelManager.toNextPos();
+        }
     }
 }
