@@ -44,7 +44,7 @@ public class Level4Script : MonoBehaviour
         }
         else
         {
-            JumpPadGameObject.GetComponent<JumpPad>().currentBounce = JumpPadGameObject.GetComponent<JumpPad>().bounce;
+            JumpPadGameObject.GetComponent<JumpPad>().currentBounce = 0f;
             EndJumpPadParticles.SetActive(false);
         }
 
