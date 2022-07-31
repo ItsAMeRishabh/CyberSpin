@@ -45,7 +45,6 @@ public class LevelManager : MonoBehaviour
         ButtonScript.instanceButtonScript.isActivated = false;
         ButtonScript.instanceButtonScript.canActivate = false;
         ButtonScript.instanceButtonScript.countdownTimer = 0f;
-        lvl4CheckpointTaken = false;
 
         if (currentLevel == 4 && lvl4CheckpointTaken)
         {
