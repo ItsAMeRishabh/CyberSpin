@@ -82,10 +82,10 @@ public class CharacterJump : MonoBehaviour
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
         }
 
-        //Can boost if Level > 3
-        if(LevelManager.currentLevel > 3)
+        //Can boost if Level > 4
+        if(LevelManager.currentLevel > 4)
         {
-            canBoost = false;
+            canBoost = true;
         }
 
         //Coyote Time Restrict
@@ -144,7 +144,7 @@ public class CharacterJump : MonoBehaviour
 
         //MID_AIR BOOSTING
         #region Mid-Air Boosting Check
-        else if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
+        if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
         {
             currentStamina -= Time.deltaTime;
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);

@@ -31,10 +31,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if(currentLevel == null)
-        {
-            toNextPos();
-        }
+
     }
 
 

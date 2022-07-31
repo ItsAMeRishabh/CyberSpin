@@ -30,6 +30,12 @@ public class LevelTriggers : MonoBehaviour
             LevelManager.currentLevel = 4;
         }
 
+        //LEVEL 4
+        if (collision.name == "Level5Trigger")
+        {
+            LevelManager.currentLevel = 5;
+        }
+
         //Level 3 Death Reset Trigger
         if (collision.name == "Level3DeathTrigger")
         {
