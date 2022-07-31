@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 4295180178633093122}
+  musicAnim: {fileID: 0}
   transitionTime: 0.7
 --- !u!1 &4295180179543620631
 GameObject:
@@ -206,8 +207,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00018310547, y: -1.2650146}
+  m_SizeDelta: {x: 45.5376, y: 68.3066}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4295180179543620635
 CanvasRenderer:
