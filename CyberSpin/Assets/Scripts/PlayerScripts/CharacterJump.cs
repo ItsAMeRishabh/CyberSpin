@@ -40,7 +40,9 @@ public class CharacterJump : MonoBehaviour
     //BOOLS
     public bool canBoost;
     public bool isBoosting;
-    
+
+    public bool canJump;
+
     //Misc
     [SerializeField]private ParticleSystem boosterSystem;
     public Animator squashAnimator;
@@ -62,6 +64,7 @@ public class CharacterJump : MonoBehaviour
         StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
 
         canBoost = false;
+        canJump = true;
     }
 
     private void Update()
@@ -103,35 +106,39 @@ public class CharacterJump : MonoBehaviour
         //NORMAL JUMP
         #region NormalJump
 
-        //vertical down Coyote Implemented
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0) 
+        if(canJump)
         {
-            rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
-            squashAnimator.SetTrigger("Jumping");
-            FindObjectOfType<AudioManager>().Play("Jump");
+            //vertical down Coyote Implemented
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0)
+            {
+                rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
+                squashAnimator.SetTrigger("Jumping");
+                FindObjectOfType<AudioManager>().Play("Jump");
+            }
+
+            //horizontal left
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
+            {
+
+                rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
+
+            }
+            //vertical up
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
+            {
+
+                rb.AddForce(new Vector2(rb.velocity.x, -jumpForceX), ForceMode2D.Impulse);
+
+            }
+            //horizontal right
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
+            {
+
+                rb.AddForce(new Vector2(-jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
+
+            }
         }
-
-        //horizontal left
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
-        {
-
-            rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
-
-        }
-        //vertical up
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
-        {
-
-            rb.AddForce(new Vector2(rb.velocity.x, -jumpForceX), ForceMode2D.Impulse);
-
-        }
-        //horizontal right
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
-        {
-
-            rb.AddForce(new Vector2(-jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
-
-        }
+        
         #endregion
 
 

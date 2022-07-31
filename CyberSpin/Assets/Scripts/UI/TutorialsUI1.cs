@@ -12,6 +12,8 @@ public class TutorialsUI1 : MonoBehaviour
     [SerializeField] private GameObject Level1MoveTut;
     [SerializeField] private GameObject Level1JumpTut;
 
+    [SerializeField] private GameObject TutorialCanvas;
+
     private float timer1;
     private float timer2;
     private float timer3;
@@ -21,6 +23,7 @@ public class TutorialsUI1 : MonoBehaviour
 
     private bool moveDone;
     private bool jumpDone;
+    private bool tutorialRunning;
 
     private void Awake()
     {
@@ -38,6 +41,8 @@ public class TutorialsUI1 : MonoBehaviour
 
         moveDone = false;
         jumpDone = true;
+
+        tutorialRunning = true;
     }
 
 
@@ -62,6 +67,17 @@ public class TutorialsUI1 : MonoBehaviour
         {
             Level1MoveTut.SetActive(false);
             Level1JumpTut.SetActive(false);
+        }
+
+
+        if(!tutorialRunning)
+        {
+            TutorialCanvas.SetActive(false);
+        }
+
+        if(LevelManager.currentLevel != 1)
+        {
+            TutorialCanvas.SetActive(false);
         }
     }
 
@@ -116,7 +132,6 @@ public class TutorialsUI1 : MonoBehaviour
                 }
                 else
                 {
-                    Level1MoveTut.SetActive(false);
                     moveDone = true;
                     jumpDone = false;
                     timer4 = 0f;
@@ -177,10 +192,10 @@ public class TutorialsUI1 : MonoBehaviour
                 }
                 else
                 {
-                    Level1JumpTut.SetActive(false);
                     moveDone = true;
                     jumpDone = true;
                     timer4 = 0f;
+                    tutorialRunning = false;
                     ResetValues();
                 }
             }

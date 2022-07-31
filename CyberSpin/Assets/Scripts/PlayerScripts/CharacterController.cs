@@ -175,10 +175,17 @@ public class CharacterController : MonoBehaviour
         if(collision.gameObject.tag == "SpeedRamp")
         {
             currentMoveSpeed = speedUpMoveSpeed;
+            CharacterJump.instanceCharacterJump.canJump = false;
         }
         else
         {
             currentMoveSpeed = moveSpeed;
+            CharacterJump.instanceCharacterJump.canJump = true;
+        }
+
+        if (collision.gameObject.name == "EndLvl4")
+        {
+            CountDownTimer.instanceCountdownTimer.EndTimer();
         }
     }
 
