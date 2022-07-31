@@ -34,7 +34,7 @@ public class ButtonScript : MonoBehaviour
         level3Countdown = 5f;
 
         level4Countdown1 = 4f;
-        level4Countdown2 = 25f;
+        level4Countdown2 = 20f;
 
         secondButtonPressed = false;
     }

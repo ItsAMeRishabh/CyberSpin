@@ -180,8 +180,6 @@ public class CharacterController : MonoBehaviour
         {
             currentMoveSpeed = moveSpeed;
         }
-
-        
     }
 
 }

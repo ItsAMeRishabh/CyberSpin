@@ -31,7 +31,7 @@ public class TutorialsUI1 : MonoBehaviour
     {
         timer1 = 1.5f;
         timer2 = 1f;
-        timer3 = 2f;
+        timer3 = 0.5f;
         timer4 = 2f;
 
         value = 0;
@@ -191,7 +191,7 @@ public class TutorialsUI1 : MonoBehaviour
     {
         timer1 = 2f;
         timer2 = 1f;
-        timer3 = 2f;
+        timer3 = 0.5f;
         timer4 = 2f;
 
         value = 0;

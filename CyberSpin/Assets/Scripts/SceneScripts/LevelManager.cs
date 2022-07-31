@@ -15,9 +15,18 @@ public class LevelManager : MonoBehaviour
 
     public static bool hasToUpdate;
 
+    public bool lvl4CheckpointTaken;
+
+    [SerializeField] private GameObject checkpointLevel4;
+
     private void Awake()
     {
         instanceLevelManager = this;
+    }
+
+    private void Start()
+    {
+        lvl4CheckpointTaken = false;
     }
 
     private void Update()
@@ -37,7 +46,14 @@ public class LevelManager : MonoBehaviour
         ButtonScript.instanceButtonScript.canActivate = false;
         ButtonScript.instanceButtonScript.countdownTimer = 0f;
 
-        rbChar.transform.position = levelPos[currentLevel - 1].position;
+        if(currentLevel == 4 && lvl4CheckpointTaken)
+        {
+            rbChar.transform.position = checkpointLevel4.transform.position;
+        }
+        else
+        {
+            rbChar.transform.position = levelPos[currentLevel - 1].position;
+        }
     }
 
     //Retry level
