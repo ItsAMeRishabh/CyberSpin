@@ -30,13 +30,6 @@ public class PauseMenu : MonoBehaviour
                 settingsMenuUI.SetActive(false);
                 Resume();
             }
-            // {
-            //     Resume();
-            // }
-            // else
-            // {
-            //     Pause();
-            // }
         }
     }
 
