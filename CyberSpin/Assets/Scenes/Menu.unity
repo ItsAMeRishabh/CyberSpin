@@ -688,7 +688,7 @@ RectTransform:
   - {fileID: 782503633}
   - {fileID: 1635762319}
   m_Father: {fileID: 1296650176}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -845,14 +845,13 @@ RectTransform:
   - {fileID: 963196426}
   - {fileID: 1102103378}
   - {fileID: 1688687514}
-  - {fileID: 144645949}
   m_Father: {fileID: 1296650176}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 183.49, y: 116}
-  m_SizeDelta: {x: 180, y: 30}
+  m_AnchoredPosition: {x: 201.25478, y: 116}
+  m_SizeDelta: {x: 197.7648, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &113592201
 MonoBehaviour:
@@ -1073,15 +1072,15 @@ RectTransform:
   m_GameObject: {fileID: 144645948}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 113592200}
+  m_Father: {fileID: 1296650176}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -175.27, y: 0}
+  m_AnchoredPosition: {x: -167.04997, y: 116}
   m_SizeDelta: {x: 171.8138, y: 36.4126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &144645950
@@ -2376,7 +2375,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1296650176}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3244,6 +3243,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 711220668}
   m_CullTransparentMesh: 1
+--- !u!95 &723828097 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4295180178633093122, guid: 74cb0c190943c9c43a29350e9413ec87, type: 3}
+  m_PrefabInstance: {fileID: 4295180178766022610}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &737758799
 GameObject:
   m_ObjectHideFlags: 0
@@ -4442,12 +4446,12 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1657976424}
         m_TargetAssemblyTypeName: LevelSelection, Assembly-CSharp
-        m_MethodName: LoadLevel
-        m_Mode: 1
+        m_MethodName: ChangeScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5556,7 +5560,7 @@ RectTransform:
   - {fileID: 784317440}
   - {fileID: 428326323}
   m_Father: {fileID: 1296650176}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6143,6 +6147,7 @@ RectTransform:
   - {fileID: 81073189}
   - {fileID: 1174076055}
   - {fileID: 113592200}
+  - {fileID: 144645949}
   - {fileID: 113464251}
   - {fileID: 1160880056}
   - {fileID: 499137491}
@@ -7510,6 +7515,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a024e0fec8f01419ebd0d372f32ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transition: {fileID: 723828097}
+  musicAnim: {fileID: 544484278}
+  transitionTime: 2
 --- !u!4 &1657976425
 Transform:
   m_ObjectHideFlags: 0
