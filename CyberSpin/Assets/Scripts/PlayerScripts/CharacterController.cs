@@ -196,6 +196,8 @@ public class CharacterController : MonoBehaviour
         {
             StarsUI.instanceStarsUI.currentStars++;
             collision.gameObject.SetActive(false);
+            
+             FindObjectOfType<AudioManager>().Play("Star Pickup");
         }
     }
 
