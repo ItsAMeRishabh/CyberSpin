@@ -7,7 +7,7 @@ public class CharacterJump : MonoBehaviour
 {
     //Script Instance
     public static CharacterJump instanceCharacterJump;
-    
+
     //Character Components
     Rigidbody2D rb;
     [SerializeField] private CircleCollider2D circleCollider2D;
@@ -19,10 +19,10 @@ public class CharacterJump : MonoBehaviour
 
     //MID AIR ACCEL & DECEL
     private float airTime;
-    [SerializeField]private float accel;
-    [SerializeField]private float deccel;
-    [SerializeField]private float velPow;
-    [SerializeField]private float fallMultiplier;
+    [SerializeField] private float accel;
+    [SerializeField] private float deccel;
+    [SerializeField] private float velPow;
+    [SerializeField] private float fallMultiplier;
     public float currentGravity;
 
     //STAMINA
@@ -44,9 +44,12 @@ public class CharacterJump : MonoBehaviour
     public bool canJump;
 
     //Misc
-    [SerializeField]private ParticleSystem boosterSystem;
+    [SerializeField] private ParticleSystem boosterSystem;
     public Animator squashAnimator;
 
+    //Input bools
+    bool leftInput;
+    bool rightInput;
 
     private void Awake()
     {
@@ -69,6 +72,16 @@ public class CharacterJump : MonoBehaviour
 
     private void Update()
     {
+        //Input
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            leftInput = Input.GetKey(KeyCode.A);
+            rightInput = Input.GetKey(KeyCode.D);
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+
+        }
         //MODIFIED FALL Y
         if (rb.velocity.y < 0 && !isBoosting)
         {
@@ -83,13 +96,13 @@ public class CharacterJump : MonoBehaviour
         }
 
         //Can boost if Level > 4
-        if(LevelManager.currentLevel > 4)
+        if (LevelManager.currentLevel > 4)
         {
             canBoost = true;
         }
 
         //Coyote Time Restrict
-        if(rb.velocity.y > 5f && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        if (rb.velocity.y > 5f && leftInput && rightInput)
         {
             coyoteTimeCounter = 0f;
         }
@@ -106,10 +119,10 @@ public class CharacterJump : MonoBehaviour
         //NORMAL JUMP
         #region NormalJump
 
-        if(canJump)
+        if (canJump)
         {
             //vertical down Coyote Implemented
-            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0)
+            if (leftInput && rightInput && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0)
             {
                 rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
                 squashAnimator.SetTrigger("Jumping");
@@ -117,34 +130,34 @@ public class CharacterJump : MonoBehaviour
             }
 
             //horizontal left
-            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
+            if (leftInput && rightInput && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
             {
 
                 rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
 
             }
             //vertical up
-            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
+            if (leftInput && rightInput && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
             {
 
                 rb.AddForce(new Vector2(rb.velocity.x, -jumpForceX), ForceMode2D.Impulse);
 
             }
             //horizontal right
-            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
+            if (leftInput && rightInput && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
             {
 
                 rb.AddForce(new Vector2(-jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
 
             }
         }
-        
+
         #endregion
 
 
         //MID_AIR BOOSTING
         #region Mid-Air Boosting Check
-        if ((Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D)) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
+        if ((leftInput && rightInput) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
         {
             currentStamina -= Time.deltaTime;
             StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
@@ -174,7 +187,7 @@ public class CharacterJump : MonoBehaviour
             currentStamina = maxStamina;
             airTime = 0;
 
-            coyoteTimeCounter = coyoteTime;               
+            coyoteTimeCounter = coyoteTime;
         }
         else
         {
@@ -230,7 +243,7 @@ public class CharacterJump : MonoBehaviour
         #endregion
 
         //More Angular Drag While Boosting
-        if(isBoosting)
+        if (isBoosting)
         {
             rb.angularDrag = 2f;
         }
@@ -336,10 +349,10 @@ public class CharacterJump : MonoBehaviour
         return raycastHit2D.collider != null;
     }
     #endregion
-    
+
     void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.name == "GravityWall")
+        if (other.gameObject.name == "GravityWall")
         {
             FindObjectOfType<AudioManager>().Play("Magnet Wall");
         }

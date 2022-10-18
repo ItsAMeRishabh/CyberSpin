@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class CharacterController : MonoBehaviour
 {
+    public Button leftButton, rightButton;
     //Script Instance
     public static CharacterController insCharCont;
     private Rigidbody2D rb;
@@ -23,7 +26,7 @@ public class CharacterController : MonoBehaviour
 
     //Bools
     public bool gravityVertical;
-    
+
     //Character Animator 
     [SerializeField] private Animator charAnimator;
 
@@ -45,7 +48,7 @@ public class CharacterController : MonoBehaviour
         currentMoveSpeed = moveSpeed;
 
         //Executed when script enabled from Level Select Scene
-        if(LevelManager.hasToUpdate)
+        if (LevelManager.hasToUpdate)
         {
             LevelManager.instanceLevelManager.toNextPos();              //Setting Level
             ButtonScript.instanceButtonScript.canActivate = false;      //ButtonScript Var
@@ -54,13 +57,50 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    public void Right_FingerDown()
+    {
+        Debug.Log("Right Finger Down");
+        if (moveHorizontal < 1)
+        {
+            moveHorizontal += 1f;
+        }
+    }
+    public void Left_FingerDown()
+    {
+        Debug.Log("Left Finger Down");
+        if (moveHorizontal > -1)
+        {
+            moveHorizontal -= 1f;
+        }
+    }
+    public void Right_FingerUp()
+    {
+        Debug.Log("Right Finger Up");
+        if (moveHorizontal > -1)
+        {
+            moveHorizontal -= 1f;
+        }
+    }
+    public void Left_FingerUp()
+    {
+        Debug.Log("Left Finger Up");
+        if (moveHorizontal < 1)
+        {
+            moveHorizontal += 1f;
+        }
+    }
+
     void Update()
     {
+        Debug.Log(moveHorizontal);
         //Input
-        moveHorizontal = Input.GetAxisRaw("Horizontal");
+        if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            moveHorizontal = Input.GetAxisRaw("Horizontal");
+        }
 
         //if normal grounded or horizontal grounded on right wall
-        if(CharacterJump.instanceCharacterJump.isGroundedVerticalUp() || CharacterJump.instanceCharacterJump.isGroundedHorizontalRight())
+        if (CharacterJump.instanceCharacterJump.isGroundedVerticalUp() || CharacterJump.instanceCharacterJump.isGroundedHorizontalRight())
         {
             moveMagnitude = -1;
         }
@@ -70,7 +110,7 @@ public class CharacterController : MonoBehaviour
         }
 
         //Animation Trigger - Moving
-        if(rb.velocity.x > 15.0f || rb.velocity.x < -15.0f)
+        if (rb.velocity.x > 15.0f || rb.velocity.x < -15.0f)
         {
             charAnimator.SetBool("isMoving", true);
         }
@@ -89,16 +129,16 @@ public class CharacterController : MonoBehaviour
             charAnimator.SetBool("isBoosting", false);
         }
 
-        
+
     }
 
     private void FixedUpdate()
-    {   
+    {
 
         if (gravityVertical)
         {
             //Player control Mid-Air normal
-            if (!CharacterJump.instanceCharacterJump.isGroundedVertical() && GravityController.instanceGravityController.gravityDirection ==0)
+            if (!CharacterJump.instanceCharacterJump.isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
             {
                 if (rb.velocity.y < 50.0f * moveMagnitude)
                 {
@@ -106,29 +146,29 @@ public class CharacterController : MonoBehaviour
                 }
             }
             //Player Control On Ground
-            if(CharacterJump.instanceCharacterJump.isGroundedVertical())
+            if (CharacterJump.instanceCharacterJump.isGroundedVertical())
             {
                 BetterMovementX(moveHorizontal, currentMoveSpeed);
             }
 
-            if(CharacterJump.instanceCharacterJump.isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
+            if (CharacterJump.instanceCharacterJump.isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
             {
                 BetterMovementX(moveHorizontal, currentMoveSpeed);
             }
         }
 
-        
+
         if (!gravityVertical)
         {
 
             //Player Control On Ground
-            if(CharacterJump.instanceCharacterJump.isGroundedHorizontal())
+            if (CharacterJump.instanceCharacterJump.isGroundedHorizontal())
             {
                 BetterMovementY(moveHorizontal, currentMoveSpeed);
             }
 
-            
-            if(CharacterJump.instanceCharacterJump.isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
+
+            if (CharacterJump.instanceCharacterJump.isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
             {
                 BetterMovementY(moveHorizontal, currentMoveSpeed);
             }
@@ -172,7 +212,7 @@ public class CharacterController : MonoBehaviour
     //SpeedRamp Collision
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "SpeedRamp")
+        if (collision.gameObject.tag == "SpeedRamp")
         {
             currentMoveSpeed = speedUpMoveSpeed;
             CharacterJump.instanceCharacterJump.canJump = false;
@@ -187,7 +227,7 @@ public class CharacterController : MonoBehaviour
         {
             CountDownTimer.instanceCountdownTimer.EndTimer();
         }
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -196,8 +236,8 @@ public class CharacterController : MonoBehaviour
         {
             StarsUI.instanceStarsUI.currentStars++;
             collision.gameObject.SetActive(false);
-            
-             FindObjectOfType<AudioManager>().Play("Star Pickup");
+
+            FindObjectOfType<AudioManager>().Play("Star Pickup");
         }
     }
 
