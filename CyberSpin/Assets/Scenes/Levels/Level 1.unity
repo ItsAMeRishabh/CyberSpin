@@ -2951,7 +2951,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7768595, y: 1}
+    m_SensorSize: {x: 1.733871, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -16107,7 +16107,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7768595, y: 1}
+    m_SensorSize: {x: 1.733871, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -30878,12 +30878,36 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1629192726}
+          m_TargetAssemblyTypeName: CharacterJump, Assembly-CSharp
+          m_MethodName: Left_FingerDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1629192720}
           m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+          m_MethodName: Left_FingerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1629192726}
+          m_TargetAssemblyTypeName: CharacterJump, Assembly-CSharp
           m_MethodName: Left_FingerUp
           m_Mode: 1
           m_Arguments:
@@ -46787,6 +46811,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f201bd74b3d6ee341b6a19d9654b9264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1629192726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 521291176059081912, guid: 29ae0a6396f5f4c48b0a38cf1a2223a4, type: 3}
+  m_PrefabInstance: {fileID: 1629192719}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055957846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8634d6797995d634fa18e55321b48a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1632857405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3334357273142955327, guid: 86f7886fb98a645459ccb3841b5d2dfd, type: 3}
@@ -47369,12 +47404,36 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1629192726}
+          m_TargetAssemblyTypeName: CharacterJump, Assembly-CSharp
+          m_MethodName: Right_FingerDown
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1629192720}
           m_TargetAssemblyTypeName: CharacterController, Assembly-CSharp
+          m_MethodName: Right_FingerUp
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1629192726}
+          m_TargetAssemblyTypeName: CharacterJump, Assembly-CSharp
           m_MethodName: Right_FingerUp
           m_Mode: 1
           m_Arguments:

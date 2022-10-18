@@ -69,6 +69,22 @@ public class CharacterJump : MonoBehaviour
         canBoost = false;
         canJump = true;
     }
+    public void Right_FingerDown()
+    {
+        rightInput = true;
+    }
+    public void Left_FingerDown()
+    {
+        leftInput = true;
+    }
+    public void Right_FingerUp()
+    {
+        rightInput = false;
+    }
+    public void Left_FingerUp()
+    {
+        leftInput = false;
+    }
 
     private void Update()
     {
