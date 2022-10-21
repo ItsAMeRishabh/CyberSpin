@@ -51,6 +51,8 @@ public class CharacterJump : MonoBehaviour
     bool leftInput;
     bool rightInput;
 
+    bool tooSoon;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -127,6 +129,12 @@ public class CharacterJump : MonoBehaviour
         boosterSystem.transform.position = rb.transform.position;
     }
 
+    IEnumerator SoonerCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        tooSoon = false;
+    }
+
     private void FixedUpdate()
     {
         //GRAVITY SCALE
@@ -135,11 +143,14 @@ public class CharacterJump : MonoBehaviour
         //NORMAL JUMP
         #region NormalJump
 
-        if (canJump)
+        if (canJump && !tooSoon)
         {
+
             //vertical down Coyote Implemented
             if (leftInput && rightInput && coyoteTimeCounter > 0f && GravityController.instanceGravityController.gravityDirection == 0)
             {
+                tooSoon = true;
+                StartCoroutine(SoonerCoroutine());
                 rb.AddForce(new Vector2(rb.velocity.x, jumpForceY), ForceMode2D.Impulse);
                 squashAnimator.SetTrigger("Jumping");
                 FindObjectOfType<AudioManager>().Play("Jump");
@@ -148,21 +159,24 @@ public class CharacterJump : MonoBehaviour
             //horizontal left
             if (leftInput && rightInput && isGroundedHorizontal() && GravityController.instanceGravityController.gravityDirection == 1)
             {
-
+                tooSoon = true;
+                StartCoroutine(SoonerCoroutine());
                 rb.AddForce(new Vector2(jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
 
             }
             //vertical up
             if (leftInput && rightInput && isGroundedVerticalUp() && GravityController.instanceGravityController.gravityDirection == 2)
             {
-
+                tooSoon = true;
+                StartCoroutine(SoonerCoroutine());
                 rb.AddForce(new Vector2(rb.velocity.x, -jumpForceX), ForceMode2D.Impulse);
 
             }
             //horizontal right
             if (leftInput && rightInput && isGroundedHorizontalRight() && GravityController.instanceGravityController.gravityDirection == 3)
             {
-
+                tooSoon = true;
+                StartCoroutine(SoonerCoroutine());
                 rb.AddForce(new Vector2(-jumpForceX, rb.velocity.y), ForceMode2D.Impulse);
 
             }

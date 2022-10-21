@@ -92,11 +92,11 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(moveHorizontal);
+        //Debug.Log(moveHorizontal);
         //Input
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            //moveHorizontal = Input.GetAxisRaw("Horizontal");
+            moveHorizontal = Input.GetAxisRaw("Horizontal");
         }
 
         //if normal grounded or horizontal grounded on right wall
