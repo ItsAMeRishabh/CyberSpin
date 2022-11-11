@@ -761,7 +761,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 809742399}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetQuality
         m_Mode: 0
         m_Arguments:
@@ -907,7 +907,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 809742399}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
         m_Arguments:
@@ -3862,8 +3862,8 @@ Canvas:
   m_GameObject: {fileID: 802896579}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_RenderMode: 0
+  m_Camera: {fileID: 553547823}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -3939,11 +3939,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 809742396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b28b50df885bf2448b32c7c7fa0ec0db, type: 3}
+  m_Script: {fileID: 11500000, guid: f82fad4912ca7a9459e25f93f5eed665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: f2fa512639bf9864e800f09bfb3fcb39, type: 2}
-  resolutionDropdown: {fileID: 113592201}
+  volMixer: {fileID: 24100000, guid: f2fa512639bf9864e800f09bfb3fcb39, type: 2}
+  volSlider: {fileID: 1174076056}
+  qualityDropDown: {fileID: 113464252}
+  resolutionDropDown: {fileID: 113592201}
+  fullscreenToggle: {fileID: 1160880057}
 --- !u!1 &822194990
 GameObject:
   m_ObjectHideFlags: 0
@@ -5615,8 +5618,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 809742399}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: SetFullscreen
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: SetFullScreen
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5713,15 +5716,15 @@ MonoBehaviour:
   m_HandleRect: {fileID: 650808306}
   m_Direction: 0
   m_MinValue: -80
-  m_MaxValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 809742399}
-        m_TargetAssemblyTypeName: SettingsMenu, Assembly-CSharp
-        m_MethodName: SetVolume
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: ChangeVol
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
