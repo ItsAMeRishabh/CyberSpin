@@ -24,6 +24,7 @@ public class LevelSelection : MonoBehaviour
 
     IEnumerator LoadLevel(int sceneIndex)
     {
+        Time.timeScale = 1f;
         transition.SetTrigger("Start");
 
         musicAnim.SetTrigger("FadeOut");
@@ -38,6 +39,11 @@ public class LevelSelection : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);                              //Has to (?) update variables on level load
 
         SceneManager.LoadScene(sceneIndex);                                //Loading Levels Scene
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
 }
