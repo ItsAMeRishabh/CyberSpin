@@ -195,6 +195,7 @@ public class CharacterController : MonoBehaviour
         rb.AddForce(movement * Vector2.right * moveMagnitude);
     }
 
+    #region Movement Script Left-Right
     //Movement Script Left-Right
     public void BetterMovementY(float moveDirection, float speed)
     {
@@ -208,6 +209,7 @@ public class CharacterController : MonoBehaviour
 
         rb.AddForce(movement * Vector2.down * moveMagnitude);
     }
+    #endregion
 
     //SpeedRamp Collision
     private void OnCollisionEnter2D(Collision2D collision)
