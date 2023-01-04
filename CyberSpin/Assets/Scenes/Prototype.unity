@@ -1256,6 +1256,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 836782214}
   m_CullTransparentMesh: 1
+--- !u!1 &887262862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 887262864}
+  - component: {fileID: 887262863}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &887262863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887262862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112f67218ce27c249aa2cac59ec1b653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: Wicked
+--- !u!4 &887262864
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 887262862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.5031233, y: -1.8712239, z: -12.305312}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &889384913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1419,7 @@ MonoBehaviour:
   deccel: 0
   velPow: 1
   fallMultiplier: 6
+  currentGravity: 9.8
   maxStamina: 3
   groundLayer:
     serializedVersion: 2
@@ -1383,7 +1429,7 @@ MonoBehaviour:
     m_Bits: 64
   canBoost: 0
   isBoosting: 0
-  currentGravity: 9.8
+  canJump: 0
   boosterSystem: {fileID: 1592286774}
   squashAnimator: {fileID: 0}
 --- !u!114 &902719303
@@ -1398,6 +1444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f201bd74b3d6ee341b6a19d9654b9264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftButton: {fileID: 0}
+  rightButton: {fileID: 0}
   childObject: {fileID: 0}
   moveSpeed: 40
   speedUpMoveSpeed: 0
@@ -1408,6 +1456,7 @@ MonoBehaviour:
   gravityVertical: 0
   charAnimator: {fileID: 0}
   offsetPosition: {x: 0, y: 0, z: 0}
+  ballTrailRenderer: {fileID: 0}
 --- !u!114 &902719304
 MonoBehaviour:
   m_ObjectHideFlags: 0
