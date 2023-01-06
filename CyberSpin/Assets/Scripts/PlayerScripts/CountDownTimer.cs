@@ -23,7 +23,7 @@ public class CountDownTimer : MonoBehaviour
 
     private void Start()
     {
-        timertext.text = "Time: 00:00.00";
+        timertext.text = "00:00.00";
         timerGoing = false;
 
         BeginTimer();
@@ -48,7 +48,7 @@ public class CountDownTimer : MonoBehaviour
         {
             elapedTime += Time.deltaTime;
             timePlaying = TimeSpan.FromSeconds(elapedTime);
-            string timePlayingStr = "Time: " + timePlaying.ToString("mm':'ss'.'ff");
+            string timePlayingStr = /*"Time: " +*/ timePlaying.ToString("mm':'ss'.'ff");
             timertext.text = timePlayingStr;
 
             yield return null;
