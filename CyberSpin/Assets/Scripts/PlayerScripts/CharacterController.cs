@@ -241,6 +241,15 @@ public class CharacterController : MonoBehaviour
 
             FindObjectOfType<AudioManager>().Play("Star Pickup");
         }
+
+        if(collision.gameObject.name == "ToSec1")
+        {
+            Level2CamSwitch.instanceLVL2CamSwitch.currentCam = 1;
+        }
+        if (collision.gameObject.name == "ToSec2")
+        {
+            Level2CamSwitch.instanceLVL2CamSwitch.currentCam = 2;
+        }
     }
 
 }

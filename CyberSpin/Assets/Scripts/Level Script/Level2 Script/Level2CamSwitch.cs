@@ -6,23 +6,18 @@ using Cinemachine;
 public class Level2CamSwitch : MonoBehaviour
 {
     //instance
-    public static Level2CamSwitch instanceCamSwitch;
+    public static Level2CamSwitch instanceLVL2CamSwitch;
 
     //VirtualCams
-    [SerializeField] private CinemachineVirtualCamera zoomOutCam;
-    [SerializeField] private CinemachineVirtualCamera playerCam;
+    [SerializeField] private CinemachineVirtualCamera section1;
+    [SerializeField] private CinemachineVirtualCamera section2;
 
     //Variables
-    private float timer;
-    private bool isSwitching;
-
-    //GameObjects
-    [SerializeField] private GameObject player;
-    public GameObject victoryScreen;
+    public float currentCam;
 
     private void Awake()
     {
-        instanceCamSwitch = this;
+        instanceLVL2CamSwitch = this;
     }
 
     private void Update()
@@ -33,33 +28,16 @@ public class Level2CamSwitch : MonoBehaviour
     //Cinemachine Camera Switch Script
     private void SwitchCamera()
     {
-        if (isSwitching)
-        {
-            //While Timer is positive
-            if (timer > 0)
+            if (currentCam == 1)
             {
-                zoomOutCam.Priority = 1;                                //Switch to Zoomed Out Camera
-                playerCam.Priority = 0;                                 //Switch off from Player Camera
-                timer -= Time.deltaTime;                                //Deducting time for every Time.deltaTime
+                section1.Priority = 1;
+                section2.Priority = 0;
             }
 
-            else
+            else if(currentCam == 2)
             {
-                LevelManager.currentLevel++;                            //Switch to next level
-                zoomOutCam.Priority = 0;                                //Switch off from Zoomed out cam
-                playerCam.Priority = 1;                                 //Switch to Player Cam
-                LevelManager.instanceLevelManager.toNextPos();          //Update Character Pos to Next Level
-                isSwitching = false;
-
-                ButtonScript.instanceButtonScript.isActivated = false;
-                ButtonScript.instanceButtonScript.canActivate = false;
-
-                player.GetComponent<CharacterController>().enabled = true;   //Turn Player Scripts on
-                player.GetComponent<CharacterJump>().enabled = true;
-
-                timer = 0;
+                section1.Priority = 0;
+                section2.Priority = 1;
             }
-        }
-
     }
 }
