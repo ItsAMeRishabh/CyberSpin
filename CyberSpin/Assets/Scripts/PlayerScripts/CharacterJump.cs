@@ -65,8 +65,8 @@ public class CharacterJump : MonoBehaviour
         //isJumping = false;
         isBoosting = false;
 
-        currentStamina = maxStamina;
-        StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
+        //currentStamina = maxStamina;
+        //StaminaBar.instanceStaminaBar.SetMaxStamina(maxStamina);
 
         canBoost = false;
         canJump = true;
@@ -110,7 +110,7 @@ public class CharacterJump : MonoBehaviour
         if (!isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0)
         {
             airTime += Time.deltaTime;
-            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
+            //StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
         }
 
         //Can boost if Level > 4
@@ -186,24 +186,24 @@ public class CharacterJump : MonoBehaviour
 
 
         //MID_AIR BOOSTING
-        #region Mid-Air Boosting Check
-        if ((leftInput && rightInput) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
-        {
-            currentStamina -= Time.deltaTime;
-            StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
-            isBoosting = true;
-
-            BetterBoostMovement();
-
-            boosterSystem.Play();
-        }
-
-        else
-        {
-            isBoosting = false;
-            boosterSystem.Stop();
-        }
-        #endregion
+        //#region Mid-Air Boosting Check
+        //if ((leftInput && rightInput) && (currentStamina > 0) && !isGroundedVertical() && GravityController.instanceGravityController.gravityDirection == 0 && airTime > 0.5f && canBoost)
+        //{
+        //    currentStamina -= Time.deltaTime;
+        //    StaminaBar.instanceStaminaBar.SetStamina(currentStamina);
+        //    isBoosting = true;
+        //
+        //    BetterBoostMovement();
+        //
+        //    boosterSystem.Play();
+        //}
+        //
+        //else
+        //{
+        //    isBoosting = false;
+        //    boosterSystem.Stop();
+        //}
+        //#endregion
 
 
         //Ground Check Bool Updates
