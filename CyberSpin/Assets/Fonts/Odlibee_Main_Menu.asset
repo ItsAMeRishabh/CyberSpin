@@ -66,7 +66,7 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0.1
+    - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
     - _ScaleRatioA: 0.9
@@ -114,11 +114,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: OdibeeSans-Regular SDF
+  m_Name: Odlibee_Main_Menu
   m_EditorClassIdentifier: 
-  hashCode: -207457591
+  hashCode: 1981945332
   material: {fileID: -8240015839959607271}
-  materialHashCode: 1795324745
+  materialHashCode: -996858156
   m_Version: 1.1.0
   m_SourceFontFileGUID: ee186b3ba8e93a94fa61f842677d23fd
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: ee186b3ba8e93a94fa61f842677d23fd, type: 3}
