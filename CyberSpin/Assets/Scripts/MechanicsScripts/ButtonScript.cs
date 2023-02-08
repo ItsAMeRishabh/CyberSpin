@@ -10,7 +10,7 @@ public class ButtonScript : MonoBehaviour
     public bool canActivate;
     public bool isActivated;
 
-    private float level2Countdown;
+    public float level2Countdown;
     public float level3Countdown;
 
     public float level4Countdown1;
@@ -30,7 +30,7 @@ public class ButtonScript : MonoBehaviour
         canActivate = false;
         isActivated = false;
 
-        level2Countdown = 10f;
+        level2Countdown = 30f;
         level3Countdown = 5f;
 
         level4Countdown1 = 4f;
